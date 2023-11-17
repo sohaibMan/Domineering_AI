@@ -31,7 +31,9 @@ public class MainApplication extends Application {
     private static final Color SECOND_PLAYER_HOVER_FILL_COLOR = Color.web("74c0fc");
 
     private static final Color DEFAULT_FILL_COLOR = Color.TRANSPARENT;
+    private static final Color DEFAULT_FILL_COLOR_2 = Color.BLACK;
     private static final Color DEFAULT_STROKE_COLOR = Color.BLACK;
+
 
     private static final boolean DEBUG = false;
 
@@ -48,7 +50,7 @@ public class MainApplication extends Application {
         for (int row = 0; row < NUM_SQUARES; row++) {
             for (int col = 0; col < NUM_SQUARES; col++) {
                 Rectangle square = new Rectangle(squareSize, squareSize);
-                square.setFill(DEFAULT_FILL_COLOR); // Set the fill color to transparent
+                square.setFill((row + col) % 2 == 0 ? DEFAULT_FILL_COLOR : DEFAULT_FILL_COLOR_2); // Set the fill color to transparent
                 square.setStroke(DEFAULT_STROKE_COLOR); // Set the border color
 
                 // Add the square to the grid
@@ -103,15 +105,16 @@ public class MainApplication extends Application {
         if (neighbourSquare != null) {
             Rectangle clickedSquare = (Rectangle) event.getSource();
             Paint currentPlayerColor = this.currentPlayer == 1 ? FIRST_PLAYER_COLOR : SECOND_PLAYER_COLOR;
+            Paint currentPlayerStorkColor = DEFAULT_STROKE_COLOR;
             // filling the bottom square with the color of the current player
             // filling the square with the color of the current player
             clickedSquare.setFill(currentPlayerColor);
-            clickedSquare.setStroke(currentPlayerColor);
+            clickedSquare.setStroke(currentPlayerStorkColor);
             // disable the square
             clickedSquare.setDisable(true);
             // filling the bottom square with the color of the current player
             neighbourSquare.setFill(currentPlayerColor);
-            neighbourSquare.setStroke(currentPlayerColor);
+            neighbourSquare.setStroke(currentPlayerStorkColor);
             // disable the square
             neighbourSquare.setDisable(true);
 
@@ -157,9 +160,11 @@ public class MainApplication extends Application {
 
     private static void resetRectangleColor(Rectangle rectangle) {
         if (rectangle == null || rectangle.isDisable()) return;
+        int row = (int) rectangle.getProperties().get("row");
+        int col = (int) rectangle.getProperties().get("col");
         // set the previous color of the rectangle
         // set the default color of the rectangle
-        rectangle.setFill(DEFAULT_FILL_COLOR); // Set the fill color to transparent
+        rectangle.setFill((row + col) % 2 == 0 ? DEFAULT_FILL_COLOR : DEFAULT_FILL_COLOR_2); // Set the fill color to transparent
         rectangle.setStroke(DEFAULT_STROKE_COLOR); // Set the border color
     }
 
