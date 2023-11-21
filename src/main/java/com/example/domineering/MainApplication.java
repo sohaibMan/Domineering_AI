@@ -1,9 +1,16 @@
 package com.example.domineering;
 
 import javafx.application.Application;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.control.Menu;
+import javafx.scene.control.MenuBar;
+import javafx.scene.control.MenuItem;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Rectangle;
@@ -15,7 +22,7 @@ import java.util.Arrays;
 
 public class MainApplication extends Application {
 
-    private static final int BOX_SIZE = 400; // Size of the box
+    private static final int BOX_SIZE = 160; // Size of the box
     private static final int NUM_SQUARES = 5; // Number of squares in each dimension
 
     private int currentPlayer = 1; // 1 for horizontal player, 2 for vertical player
@@ -41,62 +48,120 @@ public class MainApplication extends Application {
 
     @Override
     public void start(Stage stage) {
-        // todo center the window and add menu bar result and other stuff
-        stage.setTitle("Welcome to Domineering Game !");
-
+        // Set the title of the window
+        stage.setTitle("Welcome to Domineering Game!");
 
         int squareSize = BOX_SIZE / NUM_SQUARES;
 
         for (int row = 0; row < NUM_SQUARES; row++) {
             for (int col = 0; col < NUM_SQUARES; col++) {
                 Rectangle square = new Rectangle(squareSize, squareSize);
-                square.setFill((row + col) % 2 == 0 ? DEFAULT_FILL_COLOR : DEFAULT_FILL_COLOR_2); // Set the fill color to transparent
-                square.setStroke(DEFAULT_STROKE_COLOR); // Set the border color
+                square.setFill((row + col) % 2 == 0 ? DEFAULT_FILL_COLOR : DEFAULT_FILL_COLOR_2);
+                square.setStroke(DEFAULT_STROKE_COLOR);
 
                 // Add the square to the grid
                 gridPane.add(square, col, row);
                 if (DEBUG) {
-                    // type tye in the square( col,row) for debugging
                     gridPane.add(new Text(col + "," + row), col, row);
                 }
-                // add the (col,row) to the square for debugging
+
                 square.getProperties().put("col", col);
                 square.getProperties().put("row", row);
 
-                // Add a click event listener to each square
                 square.setOnMouseClicked(this::onSquareClicked);
-                // Add a hover event listener to each square
-                // todo refactor this code
+
                 square.setOnMouseEntered(event -> {
-                    // filling the bottom square with the color of the current player
                     Rectangle hoveredSquare = (Rectangle) event.getSource();
-                    // filling the bottom square with the color of the current player
                     Rectangle neighbourSquare = getNeighbourSquare((Rectangle) event.getSource());
                     if (neighbourSquare == null) return;
 
                     Paint currentPlayerHoverColor = this.currentPlayer == 1 ? FIRST_PLAYER_HOVER_COLOR : SECOND_PLAYER_HOVER_COLOR;
                     Paint currentPlayerFillColor = this.currentPlayer == 1 ? FIRST_PLAYER_HOVER_FILL_COLOR : SECOND_PLAYER_HOVER_FILL_COLOR;
-                    // temporarily filling the hovered square with the color of the current player
+
                     hoveredSquare.setStroke(currentPlayerHoverColor);
                     hoveredSquare.setFill(currentPlayerFillColor);
-                    // filling the bottom square with the color of the current player
                     neighbourSquare.setStroke(currentPlayerHoverColor);
                     neighbourSquare.setFill(currentPlayerFillColor);
                 });
 
-                // Add a hover event listener to each square
                 square.setOnMouseExited(event -> {
                     Rectangle hoveredSquare = (Rectangle) event.getSource();
                     Rectangle neighbourSquare = getNeighbourSquare((Rectangle) event.getSource());
-                    // filling the bottom square with the color of the current player
                     resetRectangleColors(hoveredSquare, neighbourSquare);
                 });
             }
         }
-        Scene scene = new Scene(gridPane, BOX_SIZE * NUM_SQUARES, BOX_SIZE * NUM_SQUARES);
+
+        VBox vBox = new VBox(gridPane);
+        vBox.setAlignment(Pos.CENTER);
+
+        vBox.setTranslateX(20);
+
+        MenuBar menuBar = new MenuBar();
+
+        Menu fileMenu = new Menu("File");
+
+        MenuItem newGameMenuItem = new MenuItem("New Game");
+        MenuItem restartMenuItem = new MenuItem("Restart");
+        MenuItem exitMenuItem = new MenuItem("Exit");
+
+        newGameMenuItem.setOnAction(e -> startNewGame());
+        restartMenuItem.setOnAction(e -> restartGame());
+        exitMenuItem.setOnAction(e -> System.exit(0));
+
+        fileMenu.getItems().addAll(newGameMenuItem, restartMenuItem, exitMenuItem);
+
+        menuBar.getMenus().add(fileMenu);
+
+        // creat a new scene with the vbox and Menubar as the root
+        BorderPane root = new BorderPane();
+        root.setTop(menuBar);
+        root.setCenter(vBox);
+
+        Scene scene = new Scene(root, BOX_SIZE * NUM_SQUARES, BOX_SIZE * NUM_SQUARES);
+
         stage.setScene(scene);
+
+        stage.setMinWidth(BOX_SIZE * NUM_SQUARES + 20);
+        stage.setMinHeight(BOX_SIZE * NUM_SQUARES);
+
         stage.show();
     }
+
+    private void startNewGame() {
+        gridPane.getChildren().forEach(node -> {
+            if (node instanceof Rectangle) {
+                Rectangle square = (Rectangle) node;
+                square.setDisable(false);
+                resetRectangleColor(square);
+            }
+        });
+
+
+        this.currentPlayer = 1;
+
+        System.out.println("Starting a new game!");
+    }
+
+    private void restartGame() {
+        gridPane.getChildren().forEach(node -> {
+            if (node instanceof Rectangle) {
+                Rectangle square = (Rectangle) node;
+                square.setDisable(false);
+                resetRectangleColor(square);
+            }
+        });
+
+
+        this.currentPlayer = 1;
+
+        System.out.println("Restarting the game!");
+    }
+
+
+
+
+
 
 
     // Event handler for square click
