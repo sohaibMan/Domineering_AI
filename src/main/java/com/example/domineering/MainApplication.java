@@ -4,9 +4,7 @@ import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.control.Menu;
-import javafx.scene.control.MenuBar;
-import javafx.scene.control.MenuItem;
+import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
@@ -15,6 +13,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.util.Arrays;
@@ -92,43 +91,55 @@ public class MainApplication extends Application {
             }
         }
 
+        // Create a VBox to contain the grid and center it
         VBox vBox = new VBox(gridPane);
         vBox.setAlignment(Pos.CENTER);
 
-        vBox.setTranslateX(20);
+        // Shift the entire VBox to the right to create a margin
+        vBox.setTranslateX(20); // Adjust the value (20) as needed
 
+        // Create a MenuBar
         MenuBar menuBar = new MenuBar();
 
+        // Create a File menu
         Menu fileMenu = new Menu("File");
 
+        // Create menu items
         MenuItem newGameMenuItem = new MenuItem("New Game");
         MenuItem restartMenuItem = new MenuItem("Restart");
         MenuItem exitMenuItem = new MenuItem("Exit");
 
+        // Set event handlers for menu items
         newGameMenuItem.setOnAction(e -> startNewGame());
         restartMenuItem.setOnAction(e -> restartGame());
-        exitMenuItem.setOnAction(e -> System.exit(0));
+        exitMenuItem.setOnAction(e -> exitGame());
 
+        // Add menu items to the File menu
         fileMenu.getItems().addAll(newGameMenuItem, restartMenuItem, exitMenuItem);
 
+        // Add the File menu to the MenuBar
         menuBar.getMenus().add(fileMenu);
 
-        // creat a new scene with the vbox and Menubar as the root
+        // Create a new scene with the VBox and MenuBar as the root
         BorderPane root = new BorderPane();
         root.setTop(menuBar);
         root.setCenter(vBox);
 
         Scene scene = new Scene(root, BOX_SIZE * NUM_SQUARES, BOX_SIZE * NUM_SQUARES);
 
+        // Set the scene to the stage
         stage.setScene(scene);
 
-        stage.setMinWidth(BOX_SIZE * NUM_SQUARES + 20);
+        // Set the minimum size of the stage to create a square window
+        stage.setMinWidth(BOX_SIZE * NUM_SQUARES + 20); // Consider the margin
         stage.setMinHeight(BOX_SIZE * NUM_SQUARES);
 
+        // Show the stage
         stage.show();
     }
 
     private void startNewGame() {
+        // Enable all squares and reset their appearance
         gridPane.getChildren().forEach(node -> {
             if (node instanceof Rectangle) {
                 Rectangle square = (Rectangle) node;
@@ -137,30 +148,65 @@ public class MainApplication extends Application {
             }
         });
 
+        // Reset any other game state variables if needed
 
+        // Start the game with the initial player (let's assume it's player 1)
         this.currentPlayer = 1;
 
         System.out.println("Starting a new game!");
     }
 
+
+    // TODO: RESTART GAME
     private void restartGame() {
-        gridPane.getChildren().forEach(node -> {
-            if (node instanceof Rectangle) {
-                Rectangle square = (Rectangle) node;
-                square.setDisable(false);
-                resetRectangleColor(square);
+        // Display a confirmation dialog before restarting the game
+        Alert confirmationDialog = new Alert(Alert.AlertType.CONFIRMATION);
+        confirmationDialog.initModality(Modality.APPLICATION_MODAL);
+        confirmationDialog.setTitle("Confirmation");
+        confirmationDialog.setHeaderText("Restart Game");
+        confirmationDialog.setContentText("Are you sure you want to restart the game?");
+
+        // Customize the buttons in the confirmation dialog
+        ButtonType yesButton = new ButtonType("Yes");
+        ButtonType noButton = new ButtonType("No");
+        confirmationDialog.getButtonTypes().setAll(yesButton, noButton);
+
+        // Show the confirmation dialog and handle the result
+        confirmationDialog.showAndWait().ifPresent(buttonType -> {
+            if (buttonType == yesButton) {
+                // User clicked "Yes," so restart the game
+                startNewGame();
+            } else {
+                // User clicked "No," do nothing
             }
         });
-
-
-        this.currentPlayer = 1;
-
-        System.out.println("Restarting the game!");
     }
 
 
+    // TODO: EXIT GAME
+    private void exitGame() {
+        // Display a confirmation dialog before exiting the game
+        Alert confirmationDialog = new Alert(Alert.AlertType.CONFIRMATION);
+        confirmationDialog.initModality(Modality.APPLICATION_MODAL);
+        confirmationDialog.setTitle("Confirmation");
+        confirmationDialog.setHeaderText("Exit Game");
+        confirmationDialog.setContentText("Are you sure you want to exit the game?");
 
+        // Customize the buttons in the confirmation dialog
+        ButtonType yesButton = new ButtonType("Yes");
+        ButtonType noButton = new ButtonType("No");
+        confirmationDialog.getButtonTypes().setAll(yesButton, noButton);
 
+        // Show the confirmation dialog and handle the result
+        confirmationDialog.showAndWait().ifPresent(buttonType -> {
+            if (buttonType == yesButton) {
+                // User clicked "Yes," so exit the application
+                System.exit(0);
+            } else {
+                // User clicked "No," do nothing
+            }
+        });
+    }
 
 
 
