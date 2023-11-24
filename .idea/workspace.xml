@@ -61,7 +61,7 @@
   <component name="RunManager">
     <configuration name="MainApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.example.domineering.MainApplication" />
-      <module name="Domineering_AI" />
+      <module name="domineering" />
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="com.example.domineering.*" />
