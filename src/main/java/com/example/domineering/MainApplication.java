@@ -1,28 +1,26 @@
 package com.example.domineering;
 
+import javafx.animation.TranslateTransition;
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.control.Menu;
-import javafx.scene.control.MenuBar;
-import javafx.scene.control.MenuItem;
+import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
 import java.util.Arrays;
 
 
 public class MainApplication extends Application {
 
-    private static final int BOX_SIZE = 160; // Size of the box
+    private static final int BOX_SIZE = 140; // Size of the box
     private static final int NUM_SQUARES = 5; // Number of squares in each dimension
 
     private int currentPlayer = 1; // 1 for horizontal player, 2 for vertical player
@@ -38,8 +36,16 @@ public class MainApplication extends Application {
     private static final Color SECOND_PLAYER_HOVER_FILL_COLOR = Color.web("74c0fc");
 
     private static final Color DEFAULT_FILL_COLOR = Color.TRANSPARENT;
-    private static final Color DEFAULT_FILL_COLOR_2 = Color.BLACK;
+    private static final Color DEFAULT_FILL_COLOR_2 = Color.GRAY;
     private static final Color DEFAULT_STROKE_COLOR = Color.BLACK;
+
+    private int movesPlayer1 = 0;
+    private int movesPlayer2 = 0;
+    private Label movesPlayer1Label;
+    private Label movesPlayer2Label;
+   private  Rectangle rectanglePlayer1= new Rectangle((BOX_SIZE * NUM_SQUARES)/13, (BOX_SIZE * NUM_SQUARES)/13);
+  private  Rectangle rectanglePlayer2= new Rectangle((BOX_SIZE * NUM_SQUARES)/13, (BOX_SIZE * NUM_SQUARES)/13);
+
 
 
     private static final boolean DEBUG = false;
@@ -51,14 +57,15 @@ public class MainApplication extends Application {
         // Set the title of the window
         stage.setTitle("Welcome to Domineering Game!");
 
-        int squareSize = BOX_SIZE / NUM_SQUARES;
+
+        int squareSize = (BOX_SIZE / NUM_SQUARES)*3;
 
         for (int row = 0; row < NUM_SQUARES; row++) {
             for (int col = 0; col < NUM_SQUARES; col++) {
                 Rectangle square = new Rectangle(squareSize, squareSize);
                 square.setFill((row + col) % 2 == 0 ? DEFAULT_FILL_COLOR : DEFAULT_FILL_COLOR_2);
                 square.setStroke(DEFAULT_STROKE_COLOR);
-
+                square.setStrokeWidth(2);
                 // Add the square to the grid
                 gridPane.add(square, col, row);
                 if (DEBUG) {
@@ -91,11 +98,62 @@ public class MainApplication extends Application {
                 });
             }
         }
+        //add a title to the game
+        Text title = new Text("Domineering Game");
+        title.setStyle("-fx-font-size: 50px; -fx-font-weight: bold; -fx-font-family: Monospaced;");
+        //add a color black to the title
+        title.setFill(Color.BLACK);
+        title.setStroke(Color.GRAY);
+        title.setStrokeWidth(2);
+        TranslateTransition translateTransition = new TranslateTransition(Duration.seconds(2), title);
+        // Définir les propriétés de l'animation (déplacement vers le haut et le bas)
+        translateTransition.setFromY(0);
+        translateTransition.setToY(-20);
+        translateTransition.setCycleCount(TranslateTransition.INDEFINITE);
+        translateTransition.setAutoReverse(true);
+        // Démarrer l'animation
+        translateTransition.play();
 
-        VBox vBox = new VBox(gridPane);
-        vBox.setAlignment(Pos.CENTER);
+        //add a rectangle
+        Rectangle rectangle = new Rectangle((BOX_SIZE * NUM_SQUARES)/1.3, (BOX_SIZE * NUM_SQUARES)/1.5);
+        rectangle.setFill(Color.TRANSPARENT);
+        rectangle.setStroke(Color.BLACK);
+        rectangle.setStrokeWidth(2);
+        rectanglePlayer1.setStroke(Color.BLACK);
+        rectanglePlayer2.setStroke(Color.BLACK);
+        if (this.currentPlayer == 1) {
+            rectanglePlayer1.setFill(FIRST_PLAYER_COLOR);
+            rectanglePlayer2.setFill(DEFAULT_FILL_COLOR);
+        } else {
+            rectanglePlayer2.setFill(SECOND_PLAYER_COLOR);
+            rectanglePlayer1.setFill(DEFAULT_FILL_COLOR);
+        }
+        GridPane table = new GridPane();
+        table.setHgap(10); // Espace horizontal entre les colonnes
+        table.setVgap(10); // Espace vertical entre les lignes
+        table.setPadding(new Insets(10)); // Marge autour du GridPane
+        //style du tableau
+        table.setStyle("-fx-background-color: #bfbaba; -fx-font-size: 15px; -fx-font-weight: bold; -fx-font-family: Monospaced;");
+        // Ajout des titres de lignes
+        table.add(new Label("Player"), 0, 0);
+        table.add(new Label("Moves"), 0, 1);
+        movesPlayer1Label = new Label("0");
+        table.add(movesPlayer1Label, 1, 1);
+        table.add(new Label("Maximal Moves"), 0, 2);
+        movesPlayer2Label = new Label("0");
+        table.add(movesPlayer2Label, 2, 1);
+        table.add(new Label("Player1"), 1, 0);
+        table.add(new Label("Player2"), 2, 0);
 
-        vBox.setTranslateX(20);
+
+
+
+
+
+
+
+
+
 
         MenuBar menuBar = new MenuBar();
 
@@ -112,11 +170,34 @@ public class MainApplication extends Application {
         fileMenu.getItems().addAll(newGameMenuItem, restartMenuItem, exitMenuItem);
 
         menuBar.getMenus().add(fileMenu);
+        menuBar.setStyle("-fx-background-color: #bfbaba; -fx-font-size: 15px; -fx-font-weight: bold; -fx-font-family: Monospaced;");
 
         // creat a new scene with the vbox and Menubar as the root
-        BorderPane root = new BorderPane();
-        root.setTop(menuBar);
-        root.setCenter(vBox);
+        Pane root = new Pane();
+        title.setLayoutY(120);
+        title.setLayoutX(450);
+        gridPane.setLayoutX(100);
+        gridPane.setLayoutY(200);
+        rectangle.setLayoutX(730);
+        rectangle.setLayoutY(185);
+        table.setLayoutX(870);
+        table.setLayoutY(520);
+        rectanglePlayer1.setLayoutX(800);
+        rectanglePlayer1.setLayoutY(200);
+        rectanglePlayer2.setLayoutX(1150);
+        rectanglePlayer2.setLayoutY(200);
+        root.getChildren().add(title);
+        root.getChildren().add(gridPane);
+        root.getChildren().add(menuBar);
+        root.getChildren().add(rectangle);
+        root.getChildren().add(table);
+        root.getChildren().add(rectanglePlayer1);
+        root.getChildren().add(rectanglePlayer2);
+
+
+
+
+
 
         Scene scene = new Scene(root, BOX_SIZE * NUM_SQUARES, BOX_SIZE * NUM_SQUARES);
 
@@ -124,8 +205,10 @@ public class MainApplication extends Application {
 
         stage.setMinWidth(BOX_SIZE * NUM_SQUARES + 20);
         stage.setMinHeight(BOX_SIZE * NUM_SQUARES);
+        stage.setFullScreen(true);
 
         stage.show();
+
     }
 
     private void startNewGame() {
@@ -135,10 +218,26 @@ public class MainApplication extends Application {
                 square.setDisable(false);
                 resetRectangleColor(square);
             }
+            movesPlayer1 = 0;
+            movesPlayer1Label.setText(String.valueOf(movesPlayer1));
+            movesPlayer2 = 0;
+            movesPlayer2Label.setText(String.valueOf(movesPlayer2));
         });
 
 
         this.currentPlayer = 1;
+        if (this.currentPlayer == 1) {
+            rectanglePlayer1.setFill(FIRST_PLAYER_COLOR);
+            rectanglePlayer1.setStroke(Color.BLACK);
+            rectanglePlayer2.setFill(DEFAULT_FILL_COLOR);
+            rectanglePlayer2.setStroke(Color.BLACK);
+        } else {
+            rectanglePlayer2.setFill(SECOND_PLAYER_COLOR);
+            rectanglePlayer2.setStroke(Color.BLACK);
+            rectanglePlayer1.setFill(DEFAULT_FILL_COLOR);
+            rectanglePlayer1.setStroke(Color.BLACK);
+        }
+
 
         System.out.println("Starting a new game!");
     }
@@ -149,6 +248,21 @@ public class MainApplication extends Application {
                 Rectangle square = (Rectangle) node;
                 square.setDisable(false);
                 resetRectangleColor(square);
+            }
+            movesPlayer1 = 0;
+            movesPlayer1Label.setText(String.valueOf(movesPlayer1));
+            movesPlayer2 = 0;
+            movesPlayer2Label.setText(String.valueOf(movesPlayer2));
+            if (this.currentPlayer == 1) {
+                rectanglePlayer1.setFill(FIRST_PLAYER_COLOR);
+                rectanglePlayer1.setStroke(Color.BLACK);
+                rectanglePlayer2.setFill(DEFAULT_FILL_COLOR);
+                rectanglePlayer2.setStroke(Color.BLACK);
+            } else {
+                rectanglePlayer2.setFill(SECOND_PLAYER_COLOR);
+                rectanglePlayer2.setStroke(Color.BLACK);
+                rectanglePlayer1.setFill(DEFAULT_FILL_COLOR);
+                rectanglePlayer1.setStroke(Color.BLACK);
             }
         });
 
@@ -169,6 +283,25 @@ public class MainApplication extends Application {
         Rectangle neighbourSquare = getNeighbourSquare((Rectangle) event.getSource());
         if (neighbourSquare != null) {
             Rectangle clickedSquare = (Rectangle) event.getSource();
+
+            if (this.currentPlayer == 1) {
+                movesPlayer1++;
+                movesPlayer1Label.setText(String.valueOf(movesPlayer1));
+            } else {
+                movesPlayer2++;
+                movesPlayer2Label.setText(String.valueOf(movesPlayer2));
+            }
+            if(this.currentPlayer == 2){
+                rectanglePlayer1.setFill(FIRST_PLAYER_COLOR);
+                rectanglePlayer1.setStroke(Color.BLACK);
+                rectanglePlayer2.setFill(DEFAULT_FILL_COLOR);
+                rectanglePlayer2.setStroke(Color.BLACK);
+            }else{
+                rectanglePlayer2.setFill(SECOND_PLAYER_COLOR);
+                rectanglePlayer2.setStroke(Color.BLACK);
+                rectanglePlayer1.setFill(DEFAULT_FILL_COLOR);
+                rectanglePlayer1.setStroke(Color.BLACK);
+            }
             Paint currentPlayerColor = this.currentPlayer == 1 ? FIRST_PLAYER_COLOR : SECOND_PLAYER_COLOR;
             Paint currentPlayerStorkColor = DEFAULT_STROKE_COLOR;
             // filling the bottom square with the color of the current player
@@ -202,15 +335,14 @@ public class MainApplication extends Application {
                 if (!square.isDisable() && neighbourSquare != null && !neighbourSquare.isDisable()) return;
             }
         }
-        // announce that the game is over on a  box
-        Text text = new Text("Game Over");
-        text.setStyle("-fx-font-size: 100px;");
-        gridPane.getChildren().clear();
-        gridPane.add(text, 0, 0);
-        // announce the winner
-        Text winner = new Text("Winner is player " + (this.currentPlayer == 1 ? 2 : 1));
-        winner.setStyle("-fx-font-size: 100px;");
-        gridPane.add(winner, 0, 1);
+        // announce that the game is over
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Game Over");
+        alert.setHeaderText(null);
+        Text text = new Text("Winner is player " + (this.currentPlayer == 1 ? 2 : 1));
+        text.setStyle("-fx-font-size: 20px; -fx-font-weight: bold; -fx-font-family: Monospaced;");
+        alert.setContentText(text.getText());
+        alert.showAndWait();
     }
 
 
@@ -233,6 +365,9 @@ public class MainApplication extends Application {
         rectangle.setStroke(DEFAULT_STROKE_COLOR); // Set the border color
     }
 
+
+
+
     private Rectangle getNeighbourSquare(Rectangle rectangle) {
         int clickedSquareRow = (int) rectangle.getProperties().get("row");
         int clickedSquareCol = (int) rectangle.getProperties().get("col");
@@ -244,4 +379,5 @@ public class MainApplication extends Application {
 
 
     }
+
 }
