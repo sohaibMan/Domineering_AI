@@ -16,6 +16,7 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 
 import java.util.Arrays;
+import java.util.List;
 
 
 public class MainApplication extends Application {
@@ -255,7 +256,6 @@ public class MainApplication extends Application {
     }
 
 
-    // TODO: RESTART GAME
     private void restartGame() {
         gridPane.getChildren().forEach(node -> {
             if (node instanceof Rectangle square) {
@@ -282,7 +282,6 @@ public class MainApplication extends Application {
         }
     }
 
-    // TODO: EXIT GAME
     private void exitGame() {
         // Display a confirmation dialog before exiting the game
         Alert confirmationDialog = new Alert(Alert.AlertType.CONFIRMATION);
@@ -312,7 +311,49 @@ public class MainApplication extends Application {
         // the human player can only play when it's his turn
         if (this.player == Player.HUMAN || this.currentPlayer == 1) {
             onSquareClickedHuman(event);
+            if (this.player != Player.HUMAN) {
+                onSquareClickedComputer();
+            }
         }
+    }
+
+    private void onSquareClickedComputer() {
+        // todo load the agent based on the player mode , for now I'll keep it random
+        // todo move each agent to a separate class
+        if (this.player == Player.RANDOM) {
+            onSquareClickedComputerRandom();
+        } else if (this.player == Player.MINIMAX) {
+            onSquareClickedComputerMinMax();
+        } else if (this.player == Player.ALPHA_BETA) {
+            onSquareClickedComputerAlphaBeta();
+        }
+    }
+
+    private void onSquareClickedComputerAlphaBeta() {
+    }
+
+    private void onSquareClickedComputerMinMax() {
+    }
+
+    private void onSquareClickedComputerRandom() {
+
+        List<Rectangle> unPlayedSquares = gridPane.getChildren().stream().filter(node -> {
+            Rectangle neighbourSquare = getNeighbourSquare((Rectangle) node, this.currentPlayer);
+            return !node.isDisable() && neighbourSquare != null && !neighbourSquare.isDisable();
+        }).map(node -> (Rectangle) node).toList();
+
+        if (!unPlayedSquares.isEmpty()) {
+            Rectangle randomSquare = unPlayedSquares.get((int) (Math.random() * unPlayedSquares.size()));
+            onSquareClickedHuman(new MouseEvent(MouseEvent.MOUSE_CLICKED, 0, 0, 0, 0, null, 0, false, false, false, false, false, false, false, false, false, false, null) {
+                @Override
+                public Object getSource() {
+                    return randomSquare;
+                }
+            });
+
+        }
+
+
     }
 
     private void onSquareClickedHuman(MouseEvent event) {
