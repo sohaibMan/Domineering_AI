@@ -1,27 +1,26 @@
 package com.example.domineering;
 
+import javafx.animation.TranslateTransition;
 import javafx.application.Application;
 import javafx.geometry.Insets;
-import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
 import java.util.Arrays;
 
 
 public class MainApplication extends Application {
 
-    private static final int BOX_SIZE = 160; // Size of the box
+    private static final int BOX_SIZE = 140; // Size of the box
     private static final int NUM_SQUARES = 5; // Number of squares in each dimension
 
     private int currentPlayer = 1; // 1 for horizontal player, 2 for vertical player
@@ -37,8 +36,18 @@ public class MainApplication extends Application {
     private static final Color SECOND_PLAYER_HOVER_FILL_COLOR = Color.web("74c0fc");
 
     private static final Color DEFAULT_FILL_COLOR = Color.TRANSPARENT;
-    private static final Color DEFAULT_FILL_COLOR_2 = Color.BLACK;
+    private static final Color DEFAULT_FILL_COLOR_2 = Color.GRAY;
     private static final Color DEFAULT_STROKE_COLOR = Color.BLACK;
+
+    private int movesPlayer1 = 0;
+    private int movesPlayer2 = 0;
+
+    private Label movesPlayer1Label;
+    private Label maxPossibleMovesPlayer1Label;
+    private Label movesPlayer2Label;
+    private Label maxPossibleMovesPlayer2Label;
+    private final Rectangle rectanglePlayer1 = new Rectangle((double) (BOX_SIZE * NUM_SQUARES) / 13, (double) (BOX_SIZE * NUM_SQUARES) / 13);
+    private final Rectangle rectanglePlayer2 = new Rectangle((double) (BOX_SIZE * NUM_SQUARES) / 13, (double) (BOX_SIZE * NUM_SQUARES) / 13);
 
 
     private static final boolean DEBUG = false;
@@ -50,14 +59,15 @@ public class MainApplication extends Application {
         // Set the title of the window
         stage.setTitle("Welcome to Domineering Game!");
 
-        int squareSize = BOX_SIZE / NUM_SQUARES;
+
+        int squareSize = (BOX_SIZE / NUM_SQUARES) * 3;
 
         for (int row = 0; row < NUM_SQUARES; row++) {
             for (int col = 0; col < NUM_SQUARES; col++) {
                 Rectangle square = new Rectangle(squareSize, squareSize);
                 square.setFill((row + col) % 2 == 0 ? DEFAULT_FILL_COLOR : DEFAULT_FILL_COLOR_2);
                 square.setStroke(DEFAULT_STROKE_COLOR);
-
+                square.setStrokeWidth(2);
                 // Add the square to the grid
                 gridPane.add(square, col, row);
                 if (DEBUG) {
@@ -71,7 +81,7 @@ public class MainApplication extends Application {
 
                 square.setOnMouseEntered(event -> {
                     Rectangle hoveredSquare = (Rectangle) event.getSource();
-                    Rectangle neighbourSquare = getNeighbourSquare((Rectangle) event.getSource());
+                    Rectangle neighbourSquare = getNeighbourSquare((Rectangle) event.getSource(), this.currentPlayer);
                     if (neighbourSquare == null) return;
 
                     Paint currentPlayerHoverColor = this.currentPlayer == 1 ? FIRST_PLAYER_HOVER_COLOR : SECOND_PLAYER_HOVER_COLOR;
@@ -85,18 +95,73 @@ public class MainApplication extends Application {
 
                 square.setOnMouseExited(event -> {
                     Rectangle hoveredSquare = (Rectangle) event.getSource();
-                    Rectangle neighbourSquare = getNeighbourSquare((Rectangle) event.getSource());
+                    Rectangle neighbourSquare = getNeighbourSquare((Rectangle) event.getSource(), this.currentPlayer);
                     resetRectangleColors(hoveredSquare, neighbourSquare);
                 });
             }
         }
+        //add a title to the game
+        Text title = new Text("Domineering Game");
+        title.setStyle("-fx-font-size: 50px; -fx-font-weight: bold; -fx-font-family: Monospaced;");
+        //add a color black to the title
+        title.setFill(Color.BLACK);
+        title.setStroke(Color.GRAY);
+        title.setStrokeWidth(2);
+        TranslateTransition translateTransition = new TranslateTransition(Duration.seconds(2), title);
+        // Define the animation properties (move up and down)
+        translateTransition.setFromY(0);
+        translateTransition.setToY(-20);
+        translateTransition.setCycleCount(TranslateTransition.INDEFINITE);
+        translateTransition.setAutoReverse(true);
+        // Start the animation
+        translateTransition.play();
+        //add a rectangle
+        Rectangle rectangle = new Rectangle((BOX_SIZE * NUM_SQUARES) / 1.3, (BOX_SIZE * NUM_SQUARES) / 1.5);
+        rectangle.setFill(Color.TRANSPARENT);
+        rectangle.setStroke(Color.BLACK);
+        rectangle.setStrokeWidth(2);
+        rectanglePlayer1.setStroke(Color.BLACK);
+        // set the position of the text
+        rectanglePlayer1.setFill(FIRST_PLAYER_COLOR);
+        rectanglePlayer2.setStroke(Color.BLACK);
+        rectanglePlayer2.setFill(DEFAULT_FILL_COLOR);
+        if (this.currentPlayer == 1) {
+            rectanglePlayer1.setFill(FIRST_PLAYER_COLOR);
+            rectanglePlayer2.setFill(DEFAULT_FILL_COLOR);
+        } else {
+            rectanglePlayer2.setFill(SECOND_PLAYER_COLOR);
+            rectanglePlayer1.setFill(DEFAULT_FILL_COLOR);
+        }
+        GridPane table = new GridPane();
+        table.setHgap(10);  // horizontal gap between the columns
+        table.setVgap(10); // vertical gap between the rows
+        table.setPadding(new Insets(10)); // the margin of the gridpane
+        //style du tableau
+        table.setStyle("-fx-background-color: #bfbaba; -fx-font-size: 15px; -fx-font-weight: bold; -fx-font-family: Monospaced;");
+        // add titles to the table
+        table.add(new Label("Player"), 0, 0);
+        table.add(new Label("Moves"), 0, 1);
+        movesPlayer1Label = new Label("0");
+        table.add(movesPlayer1Label, 1, 1);
+        table.add(new Label("Maximal Moves"), 0, 2);
+        movesPlayer2Label = new Label("0");
+        table.add(movesPlayer2Label, 2, 1);
+        table.add(new Label("Player1"), 1, 0);
+        table.add(new Label("Player2"), 2, 0);
 
-        // Create a VBox to contain the grid and center it
-        VBox vBox = new VBox(gridPane);
-        vBox.setAlignment(Pos.CENTER);
-
-        // Shift the entire VBox to the right to create a margin
-        vBox.setTranslateX(20); // Adjust the value (20) as needed
+//<<<<<<< HEAD
+//        // Create a VBox to contain the grid and center it
+//        VBox vBox = new VBox(gridPane);
+//        vBox.setAlignment(Pos.CENTER);
+//
+//        // Shift the entire VBox to the right to create a margin
+//        vBox.setTranslateX(20); // Adjust the value (20) as needed
+//=======
+        maxPossibleMovesPlayer1Label = new Label(String.valueOf(CountMaxPossibleMoves(1)));
+        table.add(maxPossibleMovesPlayer1Label, 1, 2);
+        maxPossibleMovesPlayer2Label = new Label(String.valueOf(CountMaxPossibleMoves(2)));
+        table.add(maxPossibleMovesPlayer2Label, 2, 2);
+//>>>>>>> main
 
         // Create a MenuBar
         MenuBar menuBar = new MenuBar();
@@ -119,11 +184,30 @@ public class MainApplication extends Application {
 
         // Add the File menu to the MenuBar
         menuBar.getMenus().add(fileMenu);
+        menuBar.setStyle("-fx-background-color: #bfbaba; -fx-font-size: 15px; -fx-font-weight: bold; -fx-font-family: Monospaced;");
 
-        // Create a new scene with the VBox and MenuBar as the root
-        BorderPane root = new BorderPane();
-        root.setTop(menuBar);
-        root.setCenter(vBox);
+        // creat a new scene with the vbox and Menubar as the root
+        Pane root = new Pane();
+        title.setLayoutY(120);
+        title.setLayoutX(450);
+        gridPane.setLayoutX(100);
+        gridPane.setLayoutY(200);
+        rectangle.setLayoutX(730);
+        rectangle.setLayoutY(185);
+        table.setLayoutX(870);
+        table.setLayoutY(520);
+        rectanglePlayer1.setLayoutX(800);
+        rectanglePlayer1.setLayoutY(200);
+        rectanglePlayer2.setLayoutX(1150);
+        rectanglePlayer2.setLayoutY(200);
+        root.getChildren().add(title);
+        root.getChildren().add(gridPane);
+        root.getChildren().add(menuBar);
+        root.getChildren().add(rectangle);
+        root.getChildren().add(table);
+        root.getChildren().add(rectanglePlayer1);
+        root.getChildren().add(rectanglePlayer2);
+
 
         Scene scene = new Scene(root, BOX_SIZE * NUM_SQUARES, BOX_SIZE * NUM_SQUARES);
 
@@ -133,25 +217,35 @@ public class MainApplication extends Application {
         // Set the minimum size of the stage to create a square window
         stage.setMinWidth(BOX_SIZE * NUM_SQUARES + 20); // Consider the margin
         stage.setMinHeight(BOX_SIZE * NUM_SQUARES);
+        stage.setFullScreen(true);
 
         // Show the stage
         stage.show();
+
     }
 
     private void startNewGame() {
         // Enable all squares and reset their appearance
         gridPane.getChildren().forEach(node -> {
-            if (node instanceof Rectangle) {
-                Rectangle square = (Rectangle) node;
+            if (node instanceof Rectangle square) {
                 square.setDisable(false);
                 resetRectangleColor(square);
             }
+            movesPlayer1 = 0;
+            movesPlayer1Label.setText(String.valueOf(movesPlayer1));
+            movesPlayer2 = 0;
+            movesPlayer2Label.setText(String.valueOf(movesPlayer2));
         });
 
         // Reset any other game state variables if needed
 
         // Start the game with the initial player (let's assume it's player 1)
         this.currentPlayer = 1;
+        rectanglePlayer1.setFill(FIRST_PLAYER_COLOR);
+        rectanglePlayer1.setStroke(Color.BLACK);
+        rectanglePlayer2.setFill(DEFAULT_FILL_COLOR);
+        rectanglePlayer2.setStroke(Color.BLACK);
+
 
         System.out.println("Starting a new game!");
     }
@@ -159,29 +253,28 @@ public class MainApplication extends Application {
 
     // TODO: RESTART GAME
     private void restartGame() {
-        // Display a confirmation dialog before restarting the game
-        Alert confirmationDialog = new Alert(Alert.AlertType.CONFIRMATION);
-        confirmationDialog.initModality(Modality.APPLICATION_MODAL);
-        confirmationDialog.setTitle("Confirmation");
-        confirmationDialog.setHeaderText("Restart Game");
-        confirmationDialog.setContentText("Are you sure you want to restart the game?");
-
-        // Customize the buttons in the confirmation dialog
-        ButtonType yesButton = new ButtonType("Yes");
-        ButtonType noButton = new ButtonType("No");
-        confirmationDialog.getButtonTypes().setAll(yesButton, noButton);
-
-        // Show the confirmation dialog and handle the result
-        confirmationDialog.showAndWait().ifPresent(buttonType -> {
-            if (buttonType == yesButton) {
-                // User clicked "Yes," so restart the game
-                startNewGame();
+        gridPane.getChildren().forEach(node -> {
+            if (node instanceof Rectangle square) {
+                square.setDisable(false);
+                resetRectangleColor(square);
+            }
+            movesPlayer1 = 0;
+            movesPlayer1Label.setText(String.valueOf(movesPlayer1));
+            movesPlayer2 = 0;
+            movesPlayer2Label.setText(String.valueOf(movesPlayer2));
+            if (this.currentPlayer == 1) {
+                rectanglePlayer1.setFill(FIRST_PLAYER_COLOR);
+                rectanglePlayer1.setStroke(Color.BLACK);
+                rectanglePlayer2.setFill(DEFAULT_FILL_COLOR);
+                rectanglePlayer2.setStroke(Color.BLACK);
             } else {
-                // User clicked "No," do nothing
+                rectanglePlayer2.setFill(SECOND_PLAYER_COLOR);
+                rectanglePlayer2.setStroke(Color.BLACK);
+                rectanglePlayer1.setFill(DEFAULT_FILL_COLOR);
+                rectanglePlayer1.setStroke(Color.BLACK);
             }
         });
     }
-
 
     // TODO: EXIT GAME
     private void exitGame() {
@@ -209,12 +302,30 @@ public class MainApplication extends Application {
     }
 
 
-
     // Event handler for square click
     private void onSquareClicked(MouseEvent event) {
-        Rectangle neighbourSquare = getNeighbourSquare((Rectangle) event.getSource());
+        Rectangle neighbourSquare = getNeighbourSquare((Rectangle) event.getSource(), this.currentPlayer);
         if (neighbourSquare != null) {
             Rectangle clickedSquare = (Rectangle) event.getSource();
+
+            if (this.currentPlayer == 1) {
+                movesPlayer1++;
+                movesPlayer1Label.setText(String.valueOf(movesPlayer1));
+            } else {
+                movesPlayer2++;
+                movesPlayer2Label.setText(String.valueOf(movesPlayer2));
+            }
+            if (this.currentPlayer == 2) {
+                rectanglePlayer1.setFill(FIRST_PLAYER_COLOR);
+                rectanglePlayer1.setStroke(Color.BLACK);
+                rectanglePlayer2.setFill(DEFAULT_FILL_COLOR);
+                rectanglePlayer2.setStroke(Color.BLACK);
+            } else {
+                rectanglePlayer2.setFill(SECOND_PLAYER_COLOR);
+                rectanglePlayer2.setStroke(Color.BLACK);
+                rectanglePlayer1.setFill(DEFAULT_FILL_COLOR);
+                rectanglePlayer1.setStroke(Color.BLACK);
+            }
             Paint currentPlayerColor = this.currentPlayer == 1 ? FIRST_PLAYER_COLOR : SECOND_PLAYER_COLOR;
             Paint currentPlayerStorkColor = DEFAULT_STROKE_COLOR;
             // filling the bottom square with the color of the current player
@@ -234,6 +345,9 @@ public class MainApplication extends Application {
 
             // check if the game is over
             checkIfGameIsOver();
+            // update the max possible moves
+            maxPossibleMovesPlayer1Label.setText(String.valueOf(CountMaxPossibleMoves(1)));
+            maxPossibleMovesPlayer2Label.setText(String.valueOf(CountMaxPossibleMoves(2)));
         }
 
 
@@ -244,19 +358,18 @@ public class MainApplication extends Application {
         for (int row = 0; row < NUM_SQUARES; row++) {
             for (int col = 0; col < NUM_SQUARES; col++) {
                 Rectangle square = (Rectangle) gridPane.getChildren().get(row * NUM_SQUARES + col);
-                Rectangle neighbourSquare = getNeighbourSquare(square);
+                Rectangle neighbourSquare = getNeighbourSquare(square, this.currentPlayer);
                 if (!square.isDisable() && neighbourSquare != null && !neighbourSquare.isDisable()) return;
             }
         }
-        // announce that the game is over on a  box
-        Text text = new Text("Game Over");
-        text.setStyle("-fx-font-size: 100px;");
-        gridPane.getChildren().clear();
-        gridPane.add(text, 0, 0);
-        // announce the winner
-        Text winner = new Text("Winner is player " + (this.currentPlayer == 1 ? 2 : 1));
-        winner.setStyle("-fx-font-size: 100px;");
-        gridPane.add(winner, 0, 1);
+        // announce that the game is over
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Game Over");
+        alert.setHeaderText(null);
+        Text text = new Text("Winner is player " + (this.currentPlayer == 1 ? 2 : 1));
+        text.setStyle("-fx-font-size: 20px; -fx-font-weight: bold; -fx-font-family: Monospaced;");
+        alert.setContentText(text.getText());
+        alert.showAndWait();
     }
 
 
@@ -279,15 +392,27 @@ public class MainApplication extends Application {
         rectangle.setStroke(DEFAULT_STROKE_COLOR); // Set the border color
     }
 
-    private Rectangle getNeighbourSquare(Rectangle rectangle) {
+
+    private Rectangle getNeighbourSquare(Rectangle rectangle, int currentPlayer) {
         int clickedSquareRow = (int) rectangle.getProperties().get("row");
         int clickedSquareCol = (int) rectangle.getProperties().get("col");
         // check the current player
-        if (this.currentPlayer == 1)
+        if (currentPlayer == 1)
             return this.gridPane.getChildren().stream().filter(node -> GridPane.getRowIndex(node) == clickedSquareRow + 1 && GridPane.getColumnIndex(node) == clickedSquareCol && !node.isDisable()).map(node -> (Rectangle) node).findFirst().orElse(null);
         else
             return this.gridPane.getChildren().stream().filter(node -> GridPane.getRowIndex(node) == clickedSquareRow && GridPane.getColumnIndex(node) == clickedSquareCol + 1 && !node.isDisable()).map(node -> (Rectangle) node).findFirst().orElse(null);
-
-
     }
+
+    private int CountMaxPossibleMoves(int currentPlayer) {
+        int maxPossibleMoves = 0;
+        for (int row = 0; row < NUM_SQUARES; row++) {
+            for (int col = 0; col < NUM_SQUARES; col++) {
+                Rectangle square = (Rectangle) gridPane.getChildren().get(row * NUM_SQUARES + col);
+                Rectangle neighbourSquare = getNeighbourSquare(square, currentPlayer);
+                if (!square.isDisable() && neighbourSquare != null && !neighbourSquare.isDisable()) maxPossibleMoves++;
+            }
+        }
+        return maxPossibleMoves;
+    }
+
 }
