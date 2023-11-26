@@ -23,14 +23,16 @@ public class MainApplication extends Application {
     private static final int BOX_SIZE = 140; // Size of the box
     private static final int NUM_SQUARES = 5; // Number of squares in each dimension
 
-    private int currentPlayer = 1; // 1 for horizontal player, 2 for vertical player
+    private int currentPlayer = 1; // 1 for horizontal Player, 2 for vertical Player
 
-    //? first player is horizontal player
+    private Player player = Player.HUMAN;
+
+    //? first Player is horizontal Player
     private static final Color FIRST_PLAYER_COLOR = Color.RED;
     private static final Color FIRST_PLAYER_HOVER_COLOR = Color.web("#ffc9c9");
     private static final Color FIRST_PLAYER_HOVER_FILL_COLOR = Color.web("#e03131");
 
-    //? second player is vertical player
+    //? second Player is vertical Player
     private static final Color SECOND_PLAYER_COLOR = Color.web("#1864ab");
     private static final Color SECOND_PLAYER_HOVER_COLOR = Color.web("#1864ab");
     private static final Color SECOND_PLAYER_HOVER_FILL_COLOR = Color.web("74c0fc");
@@ -46,6 +48,8 @@ public class MainApplication extends Application {
     private Label maxPossibleMovesPlayer1Label;
     private Label movesPlayer2Label;
     private Label maxPossibleMovesPlayer2Label;
+
+    private final Label adversaryLabel = new Label(this.player.toString());
     private final Rectangle rectanglePlayer1 = new Rectangle((double) (BOX_SIZE * NUM_SQUARES) / 13, (double) (BOX_SIZE * NUM_SQUARES) / 13);
     private final Rectangle rectanglePlayer2 = new Rectangle((double) (BOX_SIZE * NUM_SQUARES) / 13, (double) (BOX_SIZE * NUM_SQUARES) / 13);
 
@@ -80,6 +84,7 @@ public class MainApplication extends Application {
                 square.setOnMouseClicked(this::onSquareClicked);
 
                 square.setOnMouseEntered(event -> {
+                    if (currentPlayer == 2 && player != Player.HUMAN) return;
                     Rectangle hoveredSquare = (Rectangle) event.getSource();
                     Rectangle neighbourSquare = getNeighbourSquare((Rectangle) event.getSource(), this.currentPlayer);
                     if (neighbourSquare == null) return;
@@ -135,7 +140,7 @@ public class MainApplication extends Application {
         GridPane table = new GridPane();
         table.setHgap(10);  // horizontal gap between the columns
         table.setVgap(10); // vertical gap between the rows
-        table.setPadding(new Insets(10)); // the margin of the gridpane
+        table.setPadding(new Insets(10)); // the margin of the grid pane
         //style du tableau
         table.setStyle("-fx-background-color: #bfbaba; -fx-font-size: 15px; -fx-font-weight: bold; -fx-font-family: Monospaced;");
         // add titles to the table
@@ -146,44 +151,69 @@ public class MainApplication extends Application {
         table.add(new Label("Maximal Moves"), 0, 2);
         movesPlayer2Label = new Label("0");
         table.add(movesPlayer2Label, 2, 1);
-        table.add(new Label("Player1"), 1, 0);
-        table.add(new Label("Player2"), 2, 0);
+        table.add(new Label("Human<you>"), 1, 0);
+        table.add(adversaryLabel, 2, 0);
 
-//<<<<<<< HEAD
-//        // Create a VBox to contain the grid and center it
-//        VBox vBox = new VBox(gridPane);
-//        vBox.setAlignment(Pos.CENTER);
-//
-//        // Shift the entire VBox to the right to create a margin
-//        vBox.setTranslateX(20); // Adjust the value (20) as needed
-//=======
         maxPossibleMovesPlayer1Label = new Label(String.valueOf(CountMaxPossibleMoves(1)));
         table.add(maxPossibleMovesPlayer1Label, 1, 2);
         maxPossibleMovesPlayer2Label = new Label(String.valueOf(CountMaxPossibleMoves(2)));
         table.add(maxPossibleMovesPlayer2Label, 2, 2);
-//>>>>>>> main
+
 
         // Create a MenuBar
         MenuBar menuBar = new MenuBar();
 
-        // Create a File menu
-        Menu fileMenu = new Menu("File");
+        // Create a Option menu
+        Menu optionsMenu = new Menu("Options");
 
         // Create menu items
-        MenuItem newGameMenuItem = new MenuItem("New Game");
-        MenuItem restartMenuItem = new MenuItem("Restart");
+        MenuItem newGameMenuItem = new MenuItem("New game");
         MenuItem exitMenuItem = new MenuItem("Exit");
 
+        // create game setting menu
+        Menu playerSettingMenu = new Menu("Player mode");
+        // create menu items
+        MenuItem humanPlayerMenuItem = new MenuItem("Human");
+        MenuItem randomPlayerMenuItem = new MenuItem("Random agent");
+        MenuItem minMaxPlayerMenuItem = new MenuItem("Minimax agent");
+        MenuItem alphaBetaPlaeryMenuItem = new MenuItem("Alpha-beta agent");
+
+        // add menu items to the Player setting menu
+        playerSettingMenu.getItems().addAll(humanPlayerMenuItem, randomPlayerMenuItem, minMaxPlayerMenuItem, alphaBetaPlaeryMenuItem);
+
+        // set event handlers for menu items
+        humanPlayerMenuItem.setOnAction(e -> {
+            restartGame();
+            this.player = Player.HUMAN;
+            adversaryLabel.setText(this.player.toString());
+        });
+        randomPlayerMenuItem.setOnAction(e -> {
+            restartGame();
+            this.player = Player.RANDOM;
+            adversaryLabel.setText(this.player.toString());
+        });
+        minMaxPlayerMenuItem.setOnAction(e -> {
+            restartGame();
+            this.player = Player.MINIMAX;
+            adversaryLabel.setText(this.player.toString());
+        });
+        alphaBetaPlaeryMenuItem.setOnAction(e -> {
+            restartGame();
+            this.player = Player.ALPHA_BETA;
+            adversaryLabel.setText(this.player.toString());
+        });
+
+
         // Set event handlers for menu items
-        newGameMenuItem.setOnAction(e -> startNewGame());
-        restartMenuItem.setOnAction(e -> restartGame());
+        newGameMenuItem.setOnAction(e -> restartGame());
         exitMenuItem.setOnAction(e -> exitGame());
 
-        // Add menu items to the File menu
-        fileMenu.getItems().addAll(newGameMenuItem, restartMenuItem, exitMenuItem);
+        // Add menu items to the Options menu
+        optionsMenu.getItems().addAll(newGameMenuItem, exitMenuItem);
 
         // Add the File menu to the MenuBar
-        menuBar.getMenus().add(fileMenu);
+        menuBar.getMenus().add(optionsMenu);
+        menuBar.getMenus().add(playerSettingMenu);
         menuBar.setStyle("-fx-background-color: #bfbaba; -fx-font-size: 15px; -fx-font-weight: bold; -fx-font-family: Monospaced;");
 
         // creat a new scene with the vbox and Menubar as the root
@@ -224,32 +254,6 @@ public class MainApplication extends Application {
 
     }
 
-    private void startNewGame() {
-        // Enable all squares and reset their appearance
-        gridPane.getChildren().forEach(node -> {
-            if (node instanceof Rectangle square) {
-                square.setDisable(false);
-                resetRectangleColor(square);
-            }
-            movesPlayer1 = 0;
-            movesPlayer1Label.setText(String.valueOf(movesPlayer1));
-            movesPlayer2 = 0;
-            movesPlayer2Label.setText(String.valueOf(movesPlayer2));
-        });
-
-        // Reset any other game state variables if needed
-
-        // Start the game with the initial player (let's assume it's player 1)
-        this.currentPlayer = 1;
-        rectanglePlayer1.setFill(FIRST_PLAYER_COLOR);
-        rectanglePlayer1.setStroke(Color.BLACK);
-        rectanglePlayer2.setFill(DEFAULT_FILL_COLOR);
-        rectanglePlayer2.setStroke(Color.BLACK);
-
-
-        System.out.println("Starting a new game!");
-    }
-
 
     // TODO: RESTART GAME
     private void restartGame() {
@@ -258,22 +262,24 @@ public class MainApplication extends Application {
                 square.setDisable(false);
                 resetRectangleColor(square);
             }
-            movesPlayer1 = 0;
-            movesPlayer1Label.setText(String.valueOf(movesPlayer1));
-            movesPlayer2 = 0;
-            movesPlayer2Label.setText(String.valueOf(movesPlayer2));
-            if (this.currentPlayer == 1) {
-                rectanglePlayer1.setFill(FIRST_PLAYER_COLOR);
-                rectanglePlayer1.setStroke(Color.BLACK);
-                rectanglePlayer2.setFill(DEFAULT_FILL_COLOR);
-                rectanglePlayer2.setStroke(Color.BLACK);
-            } else {
-                rectanglePlayer2.setFill(SECOND_PLAYER_COLOR);
-                rectanglePlayer2.setStroke(Color.BLACK);
-                rectanglePlayer1.setFill(DEFAULT_FILL_COLOR);
-                rectanglePlayer1.setStroke(Color.BLACK);
-            }
         });
+        movesPlayer1 = 0;
+        movesPlayer1Label.setText(String.valueOf(movesPlayer1));
+        movesPlayer2 = 0;
+        movesPlayer2Label.setText(String.valueOf(movesPlayer2));
+        maxPossibleMovesPlayer1Label.setText(String.valueOf(CountMaxPossibleMoves(1)));
+        maxPossibleMovesPlayer2Label.setText(String.valueOf(CountMaxPossibleMoves(2)));
+        if (this.currentPlayer == 1) {
+            rectanglePlayer1.setFill(FIRST_PLAYER_COLOR);
+            rectanglePlayer1.setStroke(Color.BLACK);
+            rectanglePlayer2.setFill(DEFAULT_FILL_COLOR);
+            rectanglePlayer2.setStroke(Color.BLACK);
+        } else {
+            rectanglePlayer2.setFill(SECOND_PLAYER_COLOR);
+            rectanglePlayer2.setStroke(Color.BLACK);
+            rectanglePlayer1.setFill(DEFAULT_FILL_COLOR);
+            rectanglePlayer1.setStroke(Color.BLACK);
+        }
     }
 
     // TODO: EXIT GAME
@@ -295,15 +301,21 @@ public class MainApplication extends Application {
             if (buttonType == yesButton) {
                 // User clicked "Yes," so exit the application
                 System.exit(0);
-            } else {
-                // User clicked "No," do nothing
-            }
+            }  // User clicked "No," do nothing
+
         });
     }
 
 
     // Event handler for square click
     private void onSquareClicked(MouseEvent event) {
+        // the human player can only play when it's his turn
+        if (this.player == Player.HUMAN || this.currentPlayer == 1) {
+            onSquareClickedHuman(event);
+        }
+    }
+
+    private void onSquareClickedHuman(MouseEvent event) {
         Rectangle neighbourSquare = getNeighbourSquare((Rectangle) event.getSource(), this.currentPlayer);
         if (neighbourSquare != null) {
             Rectangle clickedSquare = (Rectangle) event.getSource();
@@ -328,19 +340,19 @@ public class MainApplication extends Application {
             }
             Paint currentPlayerColor = this.currentPlayer == 1 ? FIRST_PLAYER_COLOR : SECOND_PLAYER_COLOR;
             Paint currentPlayerStorkColor = DEFAULT_STROKE_COLOR;
-            // filling the bottom square with the color of the current player
-            // filling the square with the color of the current player
+            // filling the bottom square with the color of the current Player
+            // filling the square with the color of the current Player
             clickedSquare.setFill(currentPlayerColor);
             clickedSquare.setStroke(currentPlayerStorkColor);
             // disable the square
             clickedSquare.setDisable(true);
-            // filling the bottom square with the color of the current player
+            // filling the bottom square with the color of the current Player
             neighbourSquare.setFill(currentPlayerColor);
             neighbourSquare.setStroke(currentPlayerStorkColor);
             // disable the square
             neighbourSquare.setDisable(true);
 
-            //toggle player
+            //toggle Player
             this.currentPlayer = this.currentPlayer == 1 ? 2 : 1;
 
             // check if the game is over
@@ -350,8 +362,8 @@ public class MainApplication extends Application {
             maxPossibleMovesPlayer2Label.setText(String.valueOf(CountMaxPossibleMoves(2)));
         }
 
-
     }
+
 
     private void checkIfGameIsOver() {
         // enhance this function
@@ -366,7 +378,7 @@ public class MainApplication extends Application {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Game Over");
         alert.setHeaderText(null);
-        Text text = new Text("Winner is player " + (this.currentPlayer == 1 ? 2 : 1));
+        Text text = new Text("Winner is Player " + (this.currentPlayer == 1 ? 2 : 1));
         text.setStyle("-fx-font-size: 20px; -fx-font-weight: bold; -fx-font-family: Monospaced;");
         alert.setContentText(text.getText());
         alert.showAndWait();
@@ -396,7 +408,7 @@ public class MainApplication extends Application {
     private Rectangle getNeighbourSquare(Rectangle rectangle, int currentPlayer) {
         int clickedSquareRow = (int) rectangle.getProperties().get("row");
         int clickedSquareCol = (int) rectangle.getProperties().get("col");
-        // check the current player
+        // check the current Player
         if (currentPlayer == 1)
             return this.gridPane.getChildren().stream().filter(node -> GridPane.getRowIndex(node) == clickedSquareRow + 1 && GridPane.getColumnIndex(node) == clickedSquareCol && !node.isDisable()).map(node -> (Rectangle) node).findFirst().orElse(null);
         else

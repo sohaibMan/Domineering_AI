@@ -5,7 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4f1eaf66-04c2-480a-a7d3-97112feb4f2b" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_11_26_23,_7_20_PM_[Changes]/shelved.patch" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_11_26_23__7_20_PM__Changes_.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/domineering/Player.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/domineering/Main.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/domineering/MainApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/domineering/MainApplication.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -17,6 +21,7 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Class" />
+        <option value="Enum" />
       </list>
     </option>
   </component>
@@ -91,7 +96,6 @@
       <workItem from="1700252709465" duration="5633000" />
       <workItem from="1700344130959" duration="397000" />
       <workItem from="1700344544745" duration="39000" />
-
       <workItem from="1700344607320" duration="11561000" />
       <workItem from="1700825971086" duration="607000" />
       <workItem from="1700826651780" duration="13830000" />
