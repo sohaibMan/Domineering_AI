@@ -5,11 +5,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4f1eaf66-04c2-480a-a7d3-97112feb4f2b" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_11_26_23,_7_20_PM_[Changes]/shelved.patch" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_11_26_23__7_20_PM__Changes_.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/domineering/Player.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/domineering/Agent.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/domineering/AlphaBetaAgent.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/domineering/GameState.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/domineering/HumanAgent.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/domineering/MinMaxAgent.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/domineering/RandomAgent.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/domineering/Main.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/domineering/MainApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/domineering/MainApplication.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -20,8 +23,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Class" />
         <option value="Enum" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -63,6 +66,11 @@
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
+  <component name="RecentsManager">
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.example.domineering" />
+    </key>
+  </component>
   <component name="RunManager">
     <configuration name="MainApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.example.domineering.MainApplication" />
@@ -99,6 +107,7 @@
       <workItem from="1700344607320" duration="11561000" />
       <workItem from="1700825971086" duration="607000" />
       <workItem from="1700826651780" duration="13830000" />
+      <workItem from="1701032345117" duration="1268000" />
     </task>
     <servers />
   </component>
