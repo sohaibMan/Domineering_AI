@@ -17,4 +17,11 @@ public class DomineeringMove extends Move {
         return moveIndex_j;
     }
 
+    public void setMoveIndex_i(int moveIndex_i) {
+        this.moveIndex_i = moveIndex_i;
+    }
+
+    public void setMoveIndex_j(int moveIndex_j) {
+        this.moveIndex_j = moveIndex_j;
+    }
 }
