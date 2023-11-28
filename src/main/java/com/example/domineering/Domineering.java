@@ -3,37 +3,40 @@ package com.example.domineering;
 import java.util.Scanner;
 
 public class Domineering extends GameSearch {
-    @Override
     public boolean drawnPosition(Position p) {
-        if (GameSearch.DEBUG) System.out.println("drawnPosition("+p+")");
+        if (GameSearch.DEBUG) System.out.println("drawnPosition(" + p + ")");
 
-        boolean ret = true;
         DomineeringPosition pos = (DomineeringPosition) p;
 
-        for (int i = 0; i < 9; i++) {
-            for (int j = 0; j < 9; j++) {
+        for (int i = 0; i < 5; i++) {
+            for (int j = 0; j < 5; j++) {
                 if (pos.board[i][j] == DomineeringPosition.BLANK) {
-                    ret = false;
-                    break;
+                    if (GameSearch.DEBUG) System.out.println("     ret=false");
+                    return false;
                 }
             }
         }
 
-        if (GameSearch.DEBUG) System.out.println("     ret=" + ret);
-        return ret;
+        if (GameSearch.DEBUG) System.out.println("     ret=true");
+        return true;
     }
+
 
     @Override
     public boolean wonPosition(Position p, boolean player) {
         if (GameSearch.DEBUG) System.out.println("wonPosition("+p+","+player+")");
-//        boolean ret = false;
+
         DomineeringPosition pos = (DomineeringPosition) p;
+        boolean playerCanMove = hasMoves(pos, player);
+        boolean opponentCanMove = hasMoves(pos, !player);
 
-        if ((possibleMoves(p, player).length == possibleMoves(p, !player).length && possibleMoves(p, player) != null) ) return true;
-        else if (possibleMoves(p, player).length > possibleMoves(p, !player).length) return true;
+        return !opponentCanMove || (playerCanMove && !opponentCanMove);
+    }
 
-        if (GameSearch.DEBUG) System.out.println("     ret="+false);
-        return false;
+
+    private boolean hasMoves(DomineeringPosition pos, boolean player) {
+        Position[] moves = possibleMoves(pos, player);
+        return moves != null && moves.length > 0;
     }
 
 
@@ -46,18 +49,31 @@ public class Domineering extends GameSearch {
 
         float evaluation = playerMoves - opponentMoves;
 
+        // Add evaluation based on horizontal domination
+        for (int i = 0; i < 5; i++) {
+            for (int j = 0; j < 4; j++) {
+                if (pos.board[i][j] == DomineeringPosition.HUMAN && pos.board[i][j + 1] == DomineeringPosition.HUMAN) {
+                    evaluation += player ? 0.1 : -0.1;
+                } else if (pos.board[i][j] == DomineeringPosition.PROGRAM && pos.board[i][j + 1] == DomineeringPosition.PROGRAM) {
+                    evaluation += player ? -0.1 : 0.1;
+                }
+            }
+        }
+
+        // Add evaluation based on vertical domination
         for (int i = 0; i < 4; i++) {
             for (int j = 0; j < 5; j++) {
-                if (player && pos.board[i][j] == DomineeringPosition.HUMAN && pos.board[i + 1][j] == DomineeringPosition.HUMAN) {
-                    evaluation += 0.1;
-                } else if (!player && pos.board[i][j] == DomineeringPosition.PROGRAM && pos.board[i][j + 1] == DomineeringPosition.PROGRAM) {
-                    evaluation += 0.1;
+                if (pos.board[i][j] == DomineeringPosition.HUMAN && pos.board[i + 1][j] == DomineeringPosition.HUMAN) {
+                    evaluation += player ? 0.1 : -0.1;
+                } else if (pos.board[i][j] == DomineeringPosition.PROGRAM && pos.board[i + 1][j] == DomineeringPosition.PROGRAM) {
+                    evaluation += player ? -0.1 : 0.1;
                 }
             }
         }
 
         return evaluation;
     }
+
 
 
     @Override
@@ -90,20 +106,13 @@ public class Domineering extends GameSearch {
         DomineeringPosition pos = (DomineeringPosition) p;
         int count = 0;
 
-        if (player) {
-            for (int i = 0; i < 4; i++) {
-                for (int j = 0; j < 5; j++) {
-                    if (pos.board[i][j] == 0 && pos.board[i + 1][j] == 0) {
-                        count++;
-                    }
-                }
-            }
-        } else {
-            for (int i = 0; i < 5; i++) {
-                for (int j = 0; j < 4; j++) {
-                    if (pos.board[i][j] == 0 && pos.board[i][j + 1] == 0) {
-                        count++;
-                    }
+        int rowLimit = player ? 4 : 5;
+        int colLimit = player ? 5 : 4;
+
+        for (int i = 0; i < rowLimit; i++) {
+            for (int j = 0; j < colLimit; j++) {
+                if (pos.board[i][j] == 0 && (player ? pos.board[i + 1][j] == 0 : pos.board[i][j + 1] == 0)) {
+                    count++;
                 }
             }
         }
@@ -113,36 +122,13 @@ public class Domineering extends GameSearch {
         Position[] ret = new Position[count];
         count = 0;
 
-        if (player) {
-            for (int i = 0; i < 4; i++) {
-                for (int j = 0; j < 5; j++) {
-                    if (pos.board[i][j] == 0 && pos.board[i + 1][j] == 0) {
-                        DomineeringPosition pos2 = new DomineeringPosition();
-                        for (int k = 0; k < 5; k++) {
-                            for (int l = 0; l < 5; l++) {
-                                pos2.board[k][l] = pos.board[k][l];
-                            }
-                        }
-                        pos2.board[i][j] = DomineeringPosition.HUMAN;
-                        pos2.board[i + 1][j] = DomineeringPosition.HUMAN;
-                        ret[count++] = pos2;
-                    }
-                }
-            }
-        } else {
-            for (int i = 0; i < 5; i++) {
-                for (int j = 0; j < 4; j++) {
-                    if (pos.board[i][j] == 0 && pos.board[i][j + 1] == 0) {
-                        DomineeringPosition pos2 = new DomineeringPosition();
-                        for (int k = 0; k < 5; k++) {
-                            for (int l = 0; l < 5; l++) {
-                                pos2.board[k][l] = pos.board[k][l];
-                            }
-                        }
-                        pos2.board[i][j] = DomineeringPosition.PROGRAM;
-                        pos2.board[i][j + 1] = DomineeringPosition.PROGRAM;
-                        ret[count++] = pos2;
-                    }
+        for (int i = 0; i < rowLimit; i++) {
+            for (int j = 0; j < colLimit; j++) {
+                if (pos.board[i][j] == 0 && (player ? pos.board[i + 1][j] == 0 : pos.board[i][j + 1] == 0)) {
+                    DomineeringPosition pos2 = pos.clonePosition();
+                    pos2.board[i][j] = player ? DomineeringPosition.HUMAN : DomineeringPosition.PROGRAM;
+                    pos2.board[i + (player ? 1 : 0)][j + (player ? 0 : 1)] = player ? DomineeringPosition.HUMAN : DomineeringPosition.PROGRAM;
+                    ret[count++] = pos2;
                 }
             }
         }
@@ -151,17 +137,13 @@ public class Domineering extends GameSearch {
     }
 
 
+
     @Override
     public Position makeMove(Position p, boolean player, Move move) {
         DomineeringPosition pos = (DomineeringPosition) p;
         DomineeringMove m = (DomineeringMove) move;
 
-        DomineeringPosition pos2 = new DomineeringPosition();
-        for (int i = 0; i < 5; i++) {
-            for (int j = 0; j < 5; j++) {
-                pos2.board[i][j] = pos.board[i][j];
-            }
-        }
+        DomineeringPosition pos2 = pos.clonePosition();
 
         if (player) {
             pos2.board[m.getMoveIndex_i()][m.getMoveIndex_j()] = DomineeringPosition.HUMAN;
@@ -175,18 +157,32 @@ public class Domineering extends GameSearch {
     }
 
 
+
+
+//    @Override
+//    public boolean reachedMaxDepth(Position p, int depth) {
+//        if (depth >= 5) {
+//            return true;
+//        }
+//
+//        if (wonPosition(p, false) || wonPosition(p, true) || drawnPosition(p)) {
+//            return true;
+//        }
+//
+//        return false;
+//    }
+
     @Override
     public boolean reachedMaxDepth(Position p, int depth) {
-        if (depth >= 5) {
+        boolean currentPlayer = (depth % 2 == 0) ? PROGRAM : HUMAN;
+
+        if (wonPosition(p, currentPlayer) || drawnPosition(p)) {
             return true;
         }
 
-        if (wonPosition(p, false) || wonPosition(p, true) || drawnPosition(p)) {
-            return true;
-        }
-
-        return false;
+        return depth >= 5;
     }
+
 
 
     @Override
@@ -199,8 +195,6 @@ public class Domineering extends GameSearch {
         int j = scanner.nextInt();
 
         DomineeringMove move = new DomineeringMove(i, j);
-//        move.setMoveIndex_i(i);
-//        move.setMoveIndex_j(j);
 
         return move;
     }

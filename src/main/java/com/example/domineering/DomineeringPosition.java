@@ -7,6 +7,16 @@ public class DomineeringPosition extends Position {
 
     int[][] board = new int[5][5];
 
+    public DomineeringPosition clonePosition() {
+        DomineeringPosition clonedPosition = new DomineeringPosition();
+        for (int i = 0; i < 5; i++) {
+            for (int j = 0; j < 5; j++) {
+                clonedPosition.board[i][j] = this.board[i][j];
+            }
+        }
+        return clonedPosition;
+    }
+
     public String toString() {
         StringBuilder sb = new StringBuilder("[ \n");
 
@@ -24,11 +34,6 @@ public class DomineeringPosition extends Position {
 
         sb.append("\n]");
         return sb.toString();
-    }
-
-    public static void main(String[] args){
-        DomineeringPosition domineeringPosition = new DomineeringPosition();
-        System.out.println(domineeringPosition.toString());
     }
 }
 
