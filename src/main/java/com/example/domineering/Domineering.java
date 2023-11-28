@@ -24,13 +24,13 @@ public class Domineering extends GameSearch {
 
     @Override
     public boolean wonPosition(Position p, boolean player) {
-        if (GameSearch.DEBUG) System.out.println("wonPosition("+p+","+player+")");
+        if (GameSearch.DEBUG) System.out.println("wonPosition(" + p + "," + player + ")");
 
         DomineeringPosition pos = (DomineeringPosition) p;
         boolean playerCanMove = hasMoves(pos, player);
         boolean opponentCanMove = hasMoves(pos, !player);
 
-        return !opponentCanMove || (playerCanMove && !opponentCanMove);
+        return !opponentCanMove;
     }
 
 
@@ -53,9 +53,9 @@ public class Domineering extends GameSearch {
         for (int i = 0; i < 5; i++) {
             for (int j = 0; j < 4; j++) {
                 if (pos.board[i][j] == DomineeringPosition.HUMAN && pos.board[i][j + 1] == DomineeringPosition.HUMAN) {
-                    evaluation += player ? 0.1 : -0.1;
+                    evaluation += (float) (player ? 0.1 : -0.1);
                 } else if (pos.board[i][j] == DomineeringPosition.PROGRAM && pos.board[i][j + 1] == DomineeringPosition.PROGRAM) {
-                    evaluation += player ? -0.1 : 0.1;
+                    evaluation += (float) (player ? -0.1 : 0.1);
                 }
             }
         }
@@ -64,16 +64,15 @@ public class Domineering extends GameSearch {
         for (int i = 0; i < 4; i++) {
             for (int j = 0; j < 5; j++) {
                 if (pos.board[i][j] == DomineeringPosition.HUMAN && pos.board[i + 1][j] == DomineeringPosition.HUMAN) {
-                    evaluation += player ? 0.1 : -0.1;
+                    evaluation += (float) (player ? 0.1 : -0.1);
                 } else if (pos.board[i][j] == DomineeringPosition.PROGRAM && pos.board[i + 1][j] == DomineeringPosition.PROGRAM) {
-                    evaluation += player ? -0.1 : 0.1;
+                    evaluation += (float) (player ? -0.1 : 0.1);
                 }
             }
         }
 
         return evaluation;
     }
-
 
 
     @Override
@@ -97,8 +96,6 @@ public class Domineering extends GameSearch {
     }
 
 
-
-    // TODO : |Souhaib| i know this method is very slow, i ll optimize it later !!
     @Override
     public Position[] possibleMoves(Position p, boolean player) {
         if (GameSearch.DEBUG) System.out.println("possibleMoves(" + p + "," + player + ")");
@@ -137,7 +134,6 @@ public class Domineering extends GameSearch {
     }
 
 
-
     @Override
     public Position makeMove(Position p, boolean player, Move move) {
         DomineeringPosition pos = (DomineeringPosition) p;
@@ -157,21 +153,6 @@ public class Domineering extends GameSearch {
     }
 
 
-
-
-//    @Override
-//    public boolean reachedMaxDepth(Position p, int depth) {
-//        if (depth >= 5) {
-//            return true;
-//        }
-//
-//        if (wonPosition(p, false) || wonPosition(p, true) || drawnPosition(p)) {
-//            return true;
-//        }
-//
-//        return false;
-//    }
-
     @Override
     public boolean reachedMaxDepth(Position p, int depth) {
         boolean currentPlayer = (depth % 2 == 0) ? PROGRAM : HUMAN;
@@ -184,7 +165,6 @@ public class Domineering extends GameSearch {
     }
 
 
-
     @Override
     public Move createMove() {
         Scanner scanner = new Scanner(System.in);
@@ -194,9 +174,7 @@ public class Domineering extends GameSearch {
         int i = scanner.nextInt();
         int j = scanner.nextInt();
 
-        DomineeringMove move = new DomineeringMove(i, j);
-
-        return move;
+        return new DomineeringMove(i, j);
     }
 
     public static void main(String[] args) {

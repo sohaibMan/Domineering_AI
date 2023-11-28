@@ -10,9 +10,7 @@ public class DomineeringPosition extends Position {
     public DomineeringPosition clonePosition() {
         DomineeringPosition clonedPosition = new DomineeringPosition();
         for (int i = 0; i < 5; i++) {
-            for (int j = 0; j < 5; j++) {
-                clonedPosition.board[i][j] = this.board[i][j];
-            }
+            System.arraycopy(this.board[i], 0, clonedPosition.board[i], 0, 5);
         }
         return clonedPosition;
     }
