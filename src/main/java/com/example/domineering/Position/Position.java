@@ -94,4 +94,10 @@ public abstract class Position {
     public GridPane getGridPane() {
         return gridPane;
     }
+
+    public void reset() {
+        currentPlayer = 1;
+        movesPlayer[0] = 0;
+        movesPlayer[1] = 0;
+    }
 }

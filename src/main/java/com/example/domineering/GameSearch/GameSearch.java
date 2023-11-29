@@ -13,7 +13,7 @@ public abstract class GameSearch {
 
     public abstract Position[] possibleMoves(Position p, int player);
 
-    public abstract Move getNeighbourMove(Position position, Move move);
+    public abstract Move getNeighbourMove(Position position, Move move, int player);
 
     public abstract Move makeMove(Position gamePosition, GameSearch gameSearch);
 }

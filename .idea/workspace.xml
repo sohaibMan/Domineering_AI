@@ -4,35 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4f1eaf66-04c2-480a-a7d3-97112feb4f2b" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/domineering/DomineeringGUIConfig.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/domineering/GameSearch/DomineeringGameSearch.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/domineering/GameSearch/GameSearch.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/domineering/Helpers/DomineeringHelpers.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/domineering/Helpers/Helpers.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/domineering/Move/DomineeringMove.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/domineering/Move/Move.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/domineering/Position/DomineeringPosition.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_11_22_23,_10_48_AM_[Changes]/shelved.patch" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_11_22_23__10_48_AM__Changes_.xml" beforeDir="false" />
+    <list default="true" id="4f1eaf66-04c2-480a-a7d3-97112feb4f2b" name="Changes" comment="- fix moves count , and maximal count moves&#10;- fix winner">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/game" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/domineering/Agent/Agent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/domineering/Agent/Agent.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/domineering/Agent/AlphaBetaAgent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/domineering/Agent/AlphaBetaAgent.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/domineering/Agent/HumanAgent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/domineering/Agent/HumanAgent.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/domineering/Agent/MinMaxAgent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/domineering/Agent/MinMaxAgent.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/domineering/Agent/RandomAgent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/domineering/Agent/RandomAgent.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/domineering/Domineering.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/domineering/DomineeringGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/domineering/DomineeringGUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/domineering/DomineeringMove.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/domineering/DomineeringPosition.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/domineering/GameSearch.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/domineering/Move.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/domineering/Position.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/domineering/State/DomineeringGameState.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/domineering/State/GameState.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/domineering/Position/Position.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/domineering/GameSearch/DomineeringGameSearch.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/domineering/GameSearch/DomineeringGameSearch.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/domineering/GameSearch/GameSearch.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/domineering/GameSearch/GameSearch.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/domineering/Position/Position.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/domineering/Position/Position.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -54,6 +32,20 @@
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;sohaibMan&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">
+    <option name="selectedUrlAndAccountId">
+      <UrlAndAccount>
+        <option name="accountId" value="44ef7d4c-3fab-45f7-8f1f-b5fe18335069" />
+        <option name="url" value="https://github.com/sohaibMan/Domineering_AI.git" />
+      </UrlAndAccount>
+    </option>
+  </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
@@ -71,27 +63,27 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ASKED_ADD_EXTERNAL_FILES": "true",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "git-widget-placeholder": "Refactored",
-    "last_opened_file_path": "/home/sohaib/Desktop/Code(2-11-23)",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Project",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.27471265",
-    "settings.editor.selected.configurable": "preferences.pluginManager",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;Refactored&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/home/sohaib/Desktop/Code(2-11-23)&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.27471265&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RunManager">
     <configuration name="DomineeringGUI" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.example.domineering.DomineeringGUI" />
@@ -135,7 +127,9 @@
       <workItem from="1701190846970" duration="2761000" />
       <workItem from="1701247527819" duration="21000" />
       <workItem from="1701253250780" duration="204000" />
-      <workItem from="1701257212798" duration="10221000" />
+      <workItem from="1701257212798" duration="10503000" />
+      <workItem from="1701288803364" duration="190000" />
+      <workItem from="1701290060445" duration="794000" />
     </task>
     <task id="LOCAL-00001" summary="I've separate the gui from the state">
       <option name="closed" value="true" />
@@ -145,7 +139,15 @@
       <option name="project" value="LOCAL" />
       <updated>1701193600739</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="refactor  the whole code">
+      <option name="closed" value="true" />
+      <created>1701270871789</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1701270871789</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -180,8 +182,14 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
+    <option name="CHECK_CODE_CLEANUP_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <MESSAGE value="I've separate the gui from the state" />
-    <option name="LAST_COMMIT_MESSAGE" value="I've separate the gui from the state" />
+    <MESSAGE value="refactor  the whole code" />
+    <MESSAGE value="- fix moves count , and maximal count moves" />
+    <option name="LAST_COMMIT_MESSAGE" value="- fix moves count , and maximal count moves" />
+    <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
+    <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
+    <option name="REARRANGE_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
 </project>

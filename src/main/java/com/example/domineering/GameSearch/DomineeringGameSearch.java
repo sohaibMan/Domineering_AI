@@ -16,7 +16,7 @@ public class DomineeringGameSearch extends GameSearch {
         for (int row = 0; row < numSquares; row++) {
             for (int col = 0; col < numSquares; col++) {
                 Move move = position.getSquare(row, col);
-                Move neighbourMove = getNeighbourMove(position, move);
+                Move neighbourMove = getNeighbourMove(position, move, position.getCurrentPlayer());
                 if (!move.isDisable() && neighbourMove != null && !neighbourMove.isDisable()) return false;
             }
         }
@@ -32,8 +32,7 @@ public class DomineeringGameSearch extends GameSearch {
     }
 
 
-    public Move getNeighbourMove(Position position, Move move) {
-        int currentPlayer = position.getCurrentPlayer();
+    public Move getNeighbourMove(Position position, Move move, int currentPlayer) {
         int clickedSquareRow = (int) move.getProperties().get("row");
         int clickedSquareCol = (int) move.getProperties().get("col");
         // check the current Player

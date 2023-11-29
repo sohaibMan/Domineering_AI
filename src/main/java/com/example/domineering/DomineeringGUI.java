@@ -111,7 +111,7 @@ public class DomineeringGUI extends Application {
                 square.setOnMouseEntered(event -> {
                     if (gamePosition.isCurrentPlayer(2) && !gamePosition.isCurrentPlayer(Player.HUMAN)) return;
                     Move hoveredSquare = (Move) event.getSource();
-                    Move neighbourSquare = domineeringGameSearch.getNeighbourMove(gamePosition, (Move) event.getSource());
+                    Move neighbourSquare = domineeringGameSearch.getNeighbourMove(gamePosition, (Move) event.getSource(), gamePosition.getCurrentPlayer());
                     if (neighbourSquare == null) return;
 
                     Paint currentPlayerHoverColor = gamePosition.isCurrentPlayer(1) ? FIRST_PLAYER_HOVER_COLOR : SECOND_PLAYER_HOVER_COLOR;
@@ -125,7 +125,7 @@ public class DomineeringGUI extends Application {
 
                 square.setOnMouseExited(event -> {
                     Move hoveredSquare = (Move) event.getSource();
-                    Move neighbourSquare = domineeringGameSearch.getNeighbourMove(gamePosition, (Move) event.getSource());
+                    Move neighbourSquare = domineeringGameSearch.getNeighbourMove(gamePosition, (Move) event.getSource(), gamePosition.getCurrentPlayer());
                     resetMoveColors(hoveredSquare, neighbourSquare);
                 });
             }
@@ -179,9 +179,9 @@ public class DomineeringGUI extends Application {
         table.add(new Label("Human<you>"), 1, 0);
         table.add(adversaryLabel, 2, 0);
 
-        maxPossibleMovesPlayer1Label = new Label(String.valueOf(countMaxPossibleMoves()));
+        maxPossibleMovesPlayer1Label = new Label(String.valueOf(countMaxPossibleMoves(1)));
         table.add(maxPossibleMovesPlayer1Label, 1, 2);
-        maxPossibleMovesPlayer2Label = new Label(String.valueOf(countMaxPossibleMoves()));
+        maxPossibleMovesPlayer2Label = new Label(String.valueOf(countMaxPossibleMoves(2)));
         table.add(maxPossibleMovesPlayer2Label, 2, 2);
 
 
@@ -295,8 +295,11 @@ public class DomineeringGUI extends Application {
                 resetMoveColors(square);
             }
         });
-        maxPossibleMovesPlayer1Label.setText(String.valueOf(countMaxPossibleMoves()));
-        maxPossibleMovesPlayer2Label.setText(String.valueOf(countMaxPossibleMoves()));
+        maxPossibleMovesPlayer1Label.setText(String.valueOf(countMaxPossibleMoves(1)));
+        maxPossibleMovesPlayer2Label.setText(String.valueOf(countMaxPossibleMoves(2)));
+        movesPlayer1Label.setText("0");
+        movesPlayer2Label.setText("0");
+        this.gamePosition.reset();
         updateUI();
     }
 
@@ -329,12 +332,12 @@ public class DomineeringGUI extends Application {
     }
 
     private void makeMove(MouseEvent event) {
-        Move neighbourSquare = domineeringGameSearch.getNeighbourMove(gamePosition, (Move) event.getSource());
+        Move neighbourSquare = domineeringGameSearch.getNeighbourMove(gamePosition, (Move) event.getSource(), gamePosition.getCurrentPlayer());
         if (neighbourSquare != null) {
             Move clickedSquare = (Move) event.getSource();
 
             if (gamePosition.isCurrentPlayer(1)) {
-                gamePosition.incrementMovesPlayer(2);
+                gamePosition.incrementMovesPlayer(1);
                 movesPlayer1Label.setText(String.valueOf(gamePosition.getMovesPlayer(1)));
                 movePlayer2.setFill(SECOND_PLAYER_COLOR);
                 movePlayer2.setStroke(Color.BLACK);
@@ -374,8 +377,8 @@ public class DomineeringGUI extends Application {
             }
 
             // update the max possible moves
-            maxPossibleMovesPlayer1Label.setText(String.valueOf(countMaxPossibleMoves()));
-            maxPossibleMovesPlayer2Label.setText(String.valueOf(countMaxPossibleMoves()));
+            maxPossibleMovesPlayer1Label.setText(String.valueOf(countMaxPossibleMoves(1)));
+            maxPossibleMovesPlayer2Label.setText(String.valueOf(countMaxPossibleMoves(2)));
         }
 
     }
@@ -384,6 +387,7 @@ public class DomineeringGUI extends Application {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Game Over");
         alert.setHeaderText(null);
+        gamePosition.switchPlayer();
         int winnerPlayer = gamePosition.getCurrentPlayer();
         Text text = new Text("Winner is Player " + winnerPlayer);
         text.setStyle("-fx-font-size: 20px; -fx-font-weight: bold; -fx-font-family: Monospaced;");
@@ -425,12 +429,12 @@ public class DomineeringGUI extends Application {
         }
     }
 
-    private int countMaxPossibleMoves() {
+    private int countMaxPossibleMoves(int player) {
         int maxPossibleMoves = 0;
         for (int row = 0; row < gamePosition.getNumSquares(); row++) {
             for (int col = 0; col < gamePosition.getNumSquares(); col++) {
                 Move move = (Move) gamePosition.getGridPane().getChildren().get(row * gamePosition.getNumSquares() + col);
-                Move neighbourMove = domineeringGameSearch.getNeighbourMove(gamePosition, move);
+                Move neighbourMove = domineeringGameSearch.getNeighbourMove(gamePosition, move, player);
                 if (!move.isDisable() && neighbourMove != null && !neighbourMove.isDisable()) maxPossibleMoves++;
             }
         }
