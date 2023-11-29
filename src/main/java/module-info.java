@@ -11,6 +11,10 @@ module com.example.domineering {
     exports com.example.domineering;
     exports com.example.domineering.Agent;
     opens com.example.domineering.Agent to javafx.fxml;
-    exports com.example.domineering.State;
-    opens com.example.domineering.State to javafx.fxml;
+    exports com.example.domineering.Position;
+    opens com.example.domineering.Position to javafx.fxml;
+    exports com.example.domineering.GameSearch;
+    opens com.example.domineering.GameSearch to javafx.fxml;
+    exports com.example.domineering.Move;
+    opens com.example.domineering.Move to javafx.fxml;
 }

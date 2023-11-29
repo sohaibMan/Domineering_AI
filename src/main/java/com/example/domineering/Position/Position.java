@@ -1,17 +1,23 @@
-package com.example.domineering.State;
+package com.example.domineering.Position;
 
+import com.example.domineering.Move.Move;
 import com.example.domineering.Player;
+import javafx.scene.layout.GridPane;
 
-public abstract class GameState {
+public abstract class Position {
 
     private Player player;
     private final int[] movesPlayer = {0, 0};
     private int currentPlayer = 1;
 
+    private static final int NUM_SQUARES = 5; // Number of squares in each dimension
+
     private static final boolean DEBUG = false;
 
+    private final GridPane gridPane = new GridPane();
 
-    GameState(Player player) {
+
+    Position(Player player) {
         this.player = player;
     }
 
@@ -28,7 +34,7 @@ public abstract class GameState {
         this.player = player;
     }
 
-    public boolean isCurrentPlayerType(Player player) {
+    public boolean isCurrentPlayer(Player player) {
         return this.player == player;
     }
 
@@ -44,7 +50,7 @@ public abstract class GameState {
         }
     }
 
-    public boolean isCurrentPlayerType(int player) {
+    public boolean isCurrentPlayer(int player) {
         return currentPlayer == player;
     }
 
@@ -76,4 +82,16 @@ public abstract class GameState {
         return DEBUG;
     }
 
+
+    public int getNumSquares() {
+        return NUM_SQUARES;
+    }
+
+    public Move getSquare(int row, int col) {
+        return (Move) gridPane.getChildren().get(row * NUM_SQUARES + col);
+    }
+
+    public GridPane getGridPane() {
+        return gridPane;
+    }
 }
