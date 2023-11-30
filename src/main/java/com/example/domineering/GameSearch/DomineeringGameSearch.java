@@ -60,7 +60,6 @@ public class DomineeringGameSearch extends GameSearch {
             }
         }
 
-        // Convert the list to an array
         return possiblePositions.toArray(new DomineeringPosition[0]);
     }
 
@@ -72,6 +71,10 @@ public class DomineeringGameSearch extends GameSearch {
             for (int j = 0; j < position.getNumSquares(); j++) {
                 Move currentMove = position.getSquare(i, j);
                 if (currentMove != null) {
+                    // Initialize the move if it's null
+                    if (newPosition.getSquare(i, j) == null) {
+                        newPosition.getGridPane().add(new Move(0, 0), j, i);
+                    }
                     newPosition.getSquare(i, j).setDisable(currentMove.isDisable());
                 }
             }
@@ -90,16 +93,24 @@ public class DomineeringGameSearch extends GameSearch {
 
 
 
+
     public Move getNeighbourMove(Position position, Move move, int player) {
+        if (move == null || move.getProperties() == null || !move.getProperties().containsKey("row") || !move.getProperties().containsKey("col")) {
+            return null;
+        }
+
         int currentPlayer = position.getCurrentPlayer();
         int clickedSquareRow = (int) move.getProperties().get("row");
         int clickedSquareCol = (int) move.getProperties().get("col");
+
         // check the current Player
         if (currentPlayer == 1)
             return (Move) position.getGridPane().getChildren().stream().filter(node -> GridPane.getRowIndex(node) == clickedSquareRow + 1 && GridPane.getColumnIndex(node) == clickedSquareCol && !node.isDisable()).map(node -> (Rectangle) node).findFirst().orElse(null);
         else
             return (Move) position.getGridPane().getChildren().stream().filter(node -> GridPane.getRowIndex(node) == clickedSquareRow && GridPane.getColumnIndex(node) == clickedSquareCol + 1 && !node.isDisable()).map(node -> (Rectangle) node).findFirst().orElse(null);
     }
+
+
 
     @Override
     public Move makeMove(Position gamePosition, GameSearch gameSearch) {

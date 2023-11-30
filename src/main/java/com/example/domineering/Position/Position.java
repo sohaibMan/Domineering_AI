@@ -88,7 +88,13 @@ public abstract class Position {
     }
 
     public Move getSquare(int row, int col) {
-        return (Move) gridPane.getChildren().get(row * NUM_SQUARES + col);
+        int index = row * NUM_SQUARES + col;
+        if (index >= 0 && index < gridPane.getChildren().size()) {
+            return (Move) gridPane.getChildren().get(index);
+        } else {
+            // Handle the error, for now, returning null
+            return null;
+        }
     }
 
     public GridPane getGridPane() {

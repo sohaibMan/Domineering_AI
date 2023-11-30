@@ -12,7 +12,18 @@ public class AlphaBetaAgent extends Agent {
 
     @Override
     public Move makeMove(Position gamePosition, GameSearch domineeringGameSearch) {
-        return alphaBeta((DomineeringPosition) gamePosition, MAX_DEPTH, Float.NEGATIVE_INFINITY, Float.POSITIVE_INFINITY, true, domineeringGameSearch).move();
+        MoveEvaluation result = alphaBeta(
+                (DomineeringPosition) gamePosition,
+                MAX_DEPTH,
+                Float.NEGATIVE_INFINITY,
+                Float.POSITIVE_INFINITY,
+                true,
+                domineeringGameSearch
+        );
+
+        Move bestMove = result.move();
+        System.out.println("AI Move: " + bestMove);
+        return bestMove;
     }
 
     private MoveEvaluation alphaBeta(DomineeringPosition position, int depth, float alpha, float beta, boolean maximizingPlayer, GameSearch domineeringGameSearch) {
