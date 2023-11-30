@@ -6,9 +6,8 @@
   <component name="ChangeListManager">
     <list default="true" id="4f1eaf66-04c2-480a-a7d3-97112feb4f2b" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/domineering/Agent/AlphaBetaAgent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/domineering/Agent/AlphaBetaAgent.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/domineering/DomineeringGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/domineering/DomineeringGUI.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/domineering/GameSearch/DomineeringGameSearch.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/domineering/GameSearch/DomineeringGameSearch.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/domineering/Position/Position.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/domineering/Position/Position.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -25,7 +24,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="main" />
+        <entry key="$PROJECT_DIR$" value="Refactored" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -85,7 +84,7 @@
   <component name="RunManager">
     <configuration name="DomineeringGUI" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.example.domineering.DomineeringGUI" />
-      <module name="domineering" />
+      <module name="Domineering_AI" />
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="com.example.domineering.Agent.*" />

@@ -46,6 +46,10 @@ public class DomineeringGUI extends Application {
     // game helpers
     Helpers domineeringHelpers = new DomineeringHelpers();
 
+    Pane root = new Pane() ;
+    Button Showhint = new Button("Show hint");
+
+
     static private void resetMoveColors(Move... moves) {
         // call resetMoveColor for each move in the list
         Arrays.stream(moves).forEach(DomineeringGUI::resetMoveColor);
@@ -214,21 +218,25 @@ public class DomineeringGUI extends Application {
             restartGame();
             gamePosition.setCurrentPlayerType(Player.HUMAN);
             adversaryLabel.setText(gamePosition.getCurrentPlayerType().toString());
+            root.getChildren().remove(Showhint);
         });
         randomPlayerMenuItem.setOnAction(e -> {
             restartGame();
             gamePosition.setCurrentPlayerType(Player.RANDOM);
             adversaryLabel.setText(gamePosition.getCurrentPlayerType().toString());
+            root.getChildren().remove(Showhint);
         });
         minMaxPlayerMenuItem.setOnAction(e -> {
             restartGame();
             gamePosition.setCurrentPlayerType(Player.MINIMAX);
             adversaryLabel.setText(gamePosition.getCurrentPlayerType().toString());
+            root.getChildren().add(Showhint);
         });
         alphaBetaPlaeryMenuItem.setOnAction(e -> {
             restartGame();
             gamePosition.setCurrentPlayerType(Player.ALPHA_BETA);
             adversaryLabel.setText(gamePosition.getCurrentPlayerType().toString());
+            root.getChildren().add(Showhint);
         });
 
 
@@ -251,13 +259,16 @@ public class DomineeringGUI extends Application {
         menuBar.setStyle("-fx-background-color: #bfbaba; -fx-font-size: 15px; -fx-font-weight: bold; -fx-font-family: Monospaced;");
 
         // creat a new scene with the vbox and Menubar as the root
-        Pane root = new Pane();
+
         title.setLayoutY(120);
         title.setLayoutX(450);
         gamePosition.getGridPane().setLayoutX(100);
         gamePosition.getGridPane().setLayoutY(200);
         move.setLayoutX(730);
         move.setLayoutY(185);
+        Showhint.setLayoutX(960);
+        Showhint.setLayoutY(400);
+        Showhint.setStyle("-fx-background-color:GRAY; -fx-text-fill: white; -fx-font-size: 14; -fx-font-weight: bold; -fx-font-family: Monospaced;");
         table.setLayoutX(870);
         table.setLayoutY(520);
         movePlayer1.setLayoutX(800);
@@ -271,6 +282,8 @@ public class DomineeringGUI extends Application {
         root.getChildren().add(table);
         root.getChildren().add(movePlayer1);
         root.getChildren().add(movePlayer2);
+
+        //if i click in minmax or alphabeta i will show the button Show hint
 
 
         Scene scene = new Scene(root, BOX_SIZE * gamePosition.getNumSquares(), BOX_SIZE * gamePosition.getNumSquares());
