@@ -3,9 +3,13 @@ package com.example.domineering.GameSearch;
 import com.example.domineering.Agent.*;
 import com.example.domineering.Move.Move;
 import com.example.domineering.Player;
+import com.example.domineering.Position.DomineeringPosition;
 import com.example.domineering.Position.Position;
 import javafx.scene.layout.GridPane;
 import javafx.scene.shape.Rectangle;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class DomineeringGameSearch extends GameSearch {
 
@@ -27,12 +31,67 @@ public class DomineeringGameSearch extends GameSearch {
 
     @Override
     public Position[] possibleMoves(Position p, int player) {
-//        todo
-        return new Position[0];
+        DomineeringPosition position = (DomineeringPosition) p;
+        int numSquares = position.getNumSquares();
+
+        // List to store possible positions
+        List<DomineeringPosition> possiblePositions = new ArrayList<>();
+
+        // Iterate through each square in the grid
+        for (int row = 0; row < numSquares; row++) {
+            for (int col = 0; col < numSquares; col++) {
+                // Check if the square is empty
+                Move move = position.getSquare(row, col);
+                if (!move.isDisable()) {
+                    // Check if the adjacent square is also empty based on the player type
+                    boolean isValidMove;
+                    if (player == 1) {
+                        isValidMove = (col < numSquares - 1) && !position.getSquare(row, col + 1).isDisable();
+                    } else {
+                        isValidMove = (row < numSquares - 1) && !position.getSquare(row + 1, col).isDisable();
+                    }
+
+                    if (isValidMove) {
+                        // Create a new position with the move applied and add it to the list
+                        DomineeringPosition newPosition = createNewPosition(position, row, col, player);
+                        possiblePositions.add(newPosition);
+                    }
+                }
+            }
+        }
+
+        // Convert the list to an array
+        return possiblePositions.toArray(new DomineeringPosition[0]);
+    }
+
+    // Helper method to create a new position with a move applied
+    private DomineeringPosition createNewPosition(DomineeringPosition position, int row, int col, int player) {
+        DomineeringPosition newPosition = new DomineeringPosition(position.getCurrentPlayerType());
+        // Copy the board state
+        for (int i = 0; i < position.getNumSquares(); i++) {
+            for (int j = 0; j < position.getNumSquares(); j++) {
+                Move currentMove = position.getSquare(i, j);
+                if (currentMove != null) {
+                    newPosition.getSquare(i, j).setDisable(currentMove.isDisable());
+                }
+            }
+        }
+        // Apply the move
+        if (player == 1 && newPosition.getSquare(row, col) != null && newPosition.getSquare(row, col + 1) != null) {
+            newPosition.getSquare(row, col).setDisable(true);
+            newPosition.getSquare(row, col + 1).setDisable(true);
+        } else if (player == 2 && newPosition.getSquare(row, col) != null && newPosition.getSquare(row + 1, col) != null) {
+            newPosition.getSquare(row, col).setDisable(true);
+            newPosition.getSquare(row + 1, col).setDisable(true);
+        }
+
+        return newPosition;
     }
 
 
-    public Move getNeighbourMove(Position position, Move move, int currentPlayer) {
+
+    public Move getNeighbourMove(Position position, Move move, int player) {
+        int currentPlayer = position.getCurrentPlayer();
         int clickedSquareRow = (int) move.getProperties().get("row");
         int clickedSquareCol = (int) move.getProperties().get("col");
         // check the current Player
