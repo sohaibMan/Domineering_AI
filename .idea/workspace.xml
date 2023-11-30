@@ -6,8 +6,6 @@
   <component name="ChangeListManager">
     <list default="true" id="4f1eaf66-04c2-480a-a7d3-97112feb4f2b" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/domineering/DomineeringGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/domineering/DomineeringGUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/domineering/GameSearch/DomineeringGameSearch.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/domineering/GameSearch/DomineeringGameSearch.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -192,46 +190,6 @@
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/example/domineering/Agent/AlphaBetaAgent.java</url>
-          <line>40</line>
-          <option name="timeStamp" value="17" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/example/domineering/Agent/AlphaBetaAgent.java</url>
-          <line>38</line>
-          <option name="timeStamp" value="18" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/example/domineering/Agent/AlphaBetaAgent.java</url>
-          <line>44</line>
-          <option name="timeStamp" value="19" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/example/domineering/Agent/AlphaBetaAgent.java</url>
-          <line>46</line>
-          <option name="timeStamp" value="20" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/example/domineering/Agent/AlphaBetaAgent.java</url>
-          <line>54</line>
-          <option name="timeStamp" value="21" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/example/domineering/Agent/AlphaBetaAgent.java</url>
-          <line>58</line>
-          <option name="timeStamp" value="22" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/example/domineering/Agent/AlphaBetaAgent.java</url>
-          <line>60</line>
-          <option name="timeStamp" value="23" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/example/domineering/Agent/AlphaBetaAgent.java</url>
-          <line>41</line>
-          <option name="timeStamp" value="24" />
-        </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/com/example/domineering/GameSearch/DomineeringGameSearch.java</url>
           <line>62</line>
