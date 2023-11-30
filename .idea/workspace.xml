@@ -5,14 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4f1eaf66-04c2-480a-a7d3-97112feb4f2b" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/domineering/Agent/MoveEvaluation.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_11_24_2023_9_43_PM__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_11_24_2023_9_43_PM__Changes_.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_11_24_23__8_29_PM__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_11_24_23__8_29_PM__Changes_.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_11_26_2023_11_00_PM__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_11_26_2023_11_00_PM__Changes_.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_11_26_23__7_20_PM__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_11_26_23__7_20_PM__Changes_.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/domineering/Agent/AlphaBetaAgent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/domineering/Agent/AlphaBetaAgent.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/domineering/GameSearch/DomineeringGameSearch.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/domineering/GameSearch/DomineeringGameSearch.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/domineering/GameSearch/GameSearch.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/domineering/GameSearch/GameSearch.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/domineering/Position/Position.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/domineering/Position/Position.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -29,7 +26,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="main" />
+        <entry key="$PROJECT_DIR$" value="Refactored" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -131,7 +128,10 @@
       <workItem from="1701253250780" duration="204000" />
       <workItem from="1701257212798" duration="10503000" />
       <workItem from="1701288803364" duration="190000" />
-      <workItem from="1701290060445" duration="794000" />
+      <workItem from="1701290060445" duration="954000" />
+      <workItem from="1701293955751" duration="275000" />
+      <workItem from="1701337944209" duration="31000" />
+      <workItem from="1701345705273" duration="5047000" />
     </task>
     <task id="LOCAL-00001" summary="I've separate the gui from the state">
       <option name="closed" value="true" />
@@ -149,7 +149,15 @@
       <option name="project" value="LOCAL" />
       <updated>1701270871789</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="- fix moves count , and maximal count moves&#10;- fix winner&#10;- fix reset game">
+      <option name="closed" value="true" />
+      <created>1701290926468</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1701290926468</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -189,7 +197,9 @@
     <MESSAGE value="I've separate the gui from the state" />
     <MESSAGE value="refactor  the whole code" />
     <MESSAGE value="- fix moves count , and maximal count moves" />
-    <option name="LAST_COMMIT_MESSAGE" value="- fix moves count , and maximal count moves" />
+    <MESSAGE value="- fix moves count , and maximal count moves&#10;- fix winner" />
+    <MESSAGE value="- fix moves count , and maximal count moves&#10;- fix winner&#10;- fix reset game" />
+    <option name="LAST_COMMIT_MESSAGE" value="- fix moves count , and maximal count moves&#10;- fix winner&#10;- fix reset game" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REARRANGE_BEFORE_PROJECT_COMMIT" value="true" />
@@ -198,16 +208,46 @@
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/example/domineering/Position/Position.java</url>
-          <line>90</line>
-          <option name="timeStamp" value="1" />
+          <url>file://$PROJECT_DIR$/src/main/java/com/example/domineering/GameSearch/DomineeringGameSearch.java</url>
+          <line>80</line>
+          <option name="timeStamp" value="19" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/example/domineering/GameSearch/DomineeringGameSearch.java</url>
+          <line>47</line>
+          <option name="timeStamp" value="21" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/example/domineering/GameSearch/DomineeringGameSearch.java</url>
+          <line>48</line>
+          <option name="timeStamp" value="22" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/example/domineering/GameSearch/DomineeringGameSearch.java</url>
+          <line>50</line>
+          <option name="timeStamp" value="23" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/example/domineering/GameSearch/DomineeringGameSearch.java</url>
+          <line>49</line>
+          <option name="timeStamp" value="24" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/com/example/domineering/GameSearch/DomineeringGameSearch.java</url>
           <line>55</line>
-          <option name="timeStamp" value="3" />
+          <option name="timeStamp" value="25" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/example/domineering/GameSearch/DomineeringGameSearch.java</url>
+          <line>83</line>
+          <option name="timeStamp" value="26" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
+    <pin-to-top-manager>
+      <pinned-members>
+        <PinnedItemInfo parentTag="com.example.domineering.Position.DomineeringPosition" memberName="gridPane" />
+      </pinned-members>
+    </pin-to-top-manager>
   </component>
 </project>

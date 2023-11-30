@@ -4,7 +4,7 @@ import com.example.domineering.Move.Move;
 import com.example.domineering.Player;
 import javafx.scene.layout.GridPane;
 
-public abstract class Position {
+public abstract class Position implements Cloneable {
 
     private Player player;
     private final int[] movesPlayer = {0, 0};
@@ -99,5 +99,14 @@ public abstract class Position {
         currentPlayer = 1;
         movesPlayer[0] = 0;
         movesPlayer[1] = 0;
+    }
+
+    @Override
+    public Position clone() {
+        try {
+            return (Position) super.clone();
+        } catch (CloneNotSupportedException e) {
+            throw new AssertionError();
+        }
     }
 }

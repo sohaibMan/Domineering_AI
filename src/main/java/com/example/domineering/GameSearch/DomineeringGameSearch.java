@@ -35,7 +35,7 @@ public class DomineeringGameSearch extends GameSearch {
         int numSquares = position.getNumSquares();
 
         // List to store possible positions
-        List<DomineeringPosition> possiblePositions = new ArrayList<>();
+        List<Position> possiblePositions = new ArrayList<>();
 
         // Iterate through each square in the grid
         for (int row = 0; row < numSquares; row++) {
@@ -61,21 +61,22 @@ public class DomineeringGameSearch extends GameSearch {
         }
 
         // Convert the list to an array
-        return possiblePositions.toArray(new DomineeringPosition[0]);
+
+        return possiblePositions.toArray(new Position[0]);
     }
 
     // Helper method to create a new position with a move applied
     private DomineeringPosition createNewPosition(DomineeringPosition position, int row, int col, int player) {
         DomineeringPosition newPosition = new DomineeringPosition(position.getCurrentPlayerType());
         // Copy the board state
-        for (int i = 0; i < position.getNumSquares(); i++) {
-            for (int j = 0; j < position.getNumSquares(); j++) {
-                Move currentMove = position.getSquare(i, j);
-                if (currentMove != null) {
-                    newPosition.getSquare(i, j).setDisable(currentMove.isDisable());
-                }
-            }
-        }
+//        for (int i = 0; i < position.getNumSquares(); i++) {
+//            for (int j = 0; j < position.getNumSquares(); j++) {
+//                Move currentMove = position.getSquare(i, j);
+//                if (currentMove != null) {
+//                    newPosition.getSquare(i, j).setDisable(currentMove.isDisable());
+//                }
+//            }
+//        }
         // Apply the move
         if (player == 1 && newPosition.getSquare(row, col) != null && newPosition.getSquare(row, col + 1) != null) {
             newPosition.getSquare(row, col).setDisable(true);
@@ -87,7 +88,6 @@ public class DomineeringGameSearch extends GameSearch {
 
         return newPosition;
     }
-
 
 
     public Move getNeighbourMove(Position position, Move move, int player) {

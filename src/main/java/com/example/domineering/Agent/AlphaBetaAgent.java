@@ -2,7 +2,6 @@ package com.example.domineering.Agent;
 
 import com.example.domineering.GameSearch.GameSearch;
 import com.example.domineering.Move.Move;
-import com.example.domineering.Player;
 import com.example.domineering.Position.DomineeringPosition;
 import com.example.domineering.Position.Position;
 
@@ -12,7 +11,9 @@ public class AlphaBetaAgent extends Agent {
 
     @Override
     public Move makeMove(Position gamePosition, GameSearch domineeringGameSearch) {
-        return alphaBeta((DomineeringPosition) gamePosition, MAX_DEPTH, Float.NEGATIVE_INFINITY, Float.POSITIVE_INFINITY, true, domineeringGameSearch).move();
+        Position clonedPosition = gamePosition.clone();
+        clonedPosition.setMovesPlayer(1, 999);
+        return alphaBeta((DomineeringPosition) clonedPosition, MAX_DEPTH, Float.NEGATIVE_INFINITY, Float.POSITIVE_INFINITY, true, domineeringGameSearch).move();
     }
 
     private MoveEvaluation alphaBeta(DomineeringPosition position, int depth, float alpha, float beta, boolean maximizingPlayer, GameSearch domineeringGameSearch) {
@@ -57,21 +58,16 @@ public class AlphaBetaAgent extends Agent {
         return bestMove;
     }
 
-    private float evaluatePosition(DomineeringPosition position, GameSearch domineeringGameSearch) {
-        int player = position.isCurrentPlayer(Player.HUMAN) ? 1 : 2;
-        return positionEvaluation(position, player, domineeringGameSearch);
-    }
-
-
-    private float positionEvaluation(DomineeringPosition pos, int player, GameSearch domineeringGameSearch) {
+    private float evaluatePosition(DomineeringPosition pos, GameSearch domineeringGameSearch) {
+        int player = pos.getCurrentPlayer();
         int playerMoves = domineeringGameSearch.possibleMoves(pos, player) != null ? domineeringGameSearch.possibleMoves(pos, player).length : 0;
         int opponentMoves = domineeringGameSearch.possibleMoves(pos, 3 - player) != null ? domineeringGameSearch.possibleMoves(pos, 3 - player).length : 0;
 
         float evaluation = playerMoves - opponentMoves;
 
         // Add evaluation based on horizontal domination
-        for (int i = 0; i < 5; i++) {
-            for (int j = 0; j < 4; j++) {
+        for (int i = 0; i < pos.getNumSquares(); i++) {
+            for (int j = 0; j < pos.getNumSquares() - 1; j++) {
                 if (pos.getSquare(i, j).isDisable() && pos.getSquare(i, j + 1).isDisable()) {
                     evaluation += (float) (player == 1 ? 0.1 : -0.1);
                 }
@@ -79,8 +75,8 @@ public class AlphaBetaAgent extends Agent {
         }
 
         // Add evaluation based on vertical domination
-        for (int i = 0; i < 4; i++) {
-            for (int j = 0; j < 5; j++) {
+        for (int i = 0; i < pos.getNumSquares() - 1; i++) {
+            for (int j = 0; j < pos.getNumSquares(); j++) {
                 if (pos.getSquare(i, j).isDisable() && pos.getSquare(i + 1, j).isDisable()) {
                     evaluation += (float) (player == 1 ? 0.1 : -0.1);
                 }
