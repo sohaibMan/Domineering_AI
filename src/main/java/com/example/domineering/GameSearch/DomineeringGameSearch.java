@@ -99,10 +99,10 @@ public class DomineeringGameSearch extends GameSearch {
     @Override
     public Move makeMove(Position gamePosition, GameSearch gameSearch) {
         Agent agent = switch (gamePosition.getCurrentPlayerType()) {
-            case Player.HUMAN -> new HumanAgent();
-            case Player.MINIMAX -> new MinMaxAgent();
-            case Player.RANDOM -> new RandomAgent();
-            case Player.ALPHA_BETA -> new AlphaBetaAgent();
+            case HUMAN -> new HumanAgent();
+            case MINIMAX -> new MinMaxAgent();
+            case RANDOM -> new RandomAgent();
+            case ALPHA_BETA -> new AlphaBetaAgent();
         };
         return agent.makeMove(gamePosition, gameSearch);
     }
