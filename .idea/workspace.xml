@@ -4,10 +4,16 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4f1eaf66-04c2-480a-a7d3-97112feb4f2b" name="Changes" comment="">
+    <list default="true" id="4f1eaf66-04c2-480a-a7d3-97112feb4f2b" name="Changes" comment="fix alpha beta">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/domineering/Agent/AlphaBetaAgentMoveEvaluation.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/domineering/Move/AlphaBetaAgentMove.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/domineering/Agent/AlphaBetaAgent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/domineering/Agent/AlphaBetaAgent.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/domineering/Agent/MoveEvaluation.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/domineering/DomineeringGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/domineering/DomineeringGUI.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/domineering/GameSearch/DomineeringGameSearch.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/domineering/GameSearch/DomineeringGameSearch.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/domineering/GameSearch/GameSearch.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/domineering/GameSearch/GameSearch.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/domineering/Move/Move.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/domineering/Move/Move.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/domineering/Position/Position.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/domineering/Position/Position.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -25,7 +31,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="main" />
+        <entry key="$PROJECT_DIR$" value="Convert" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -68,7 +74,7 @@
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;Convert&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;FixV1&quot;,
     &quot;last_opened_file_path&quot;: &quot;/home/sohaib/Desktop/Code(2-11-23)&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
@@ -100,6 +106,7 @@
       <list>
         <item itemvalue="Application.DomineeringGUI" />
         <item itemvalue="Application.DomineeringGUI" />
+        <item itemvalue="Application.DomineeringGUI" />
       </list>
     </recent_temporary>
   </component>
@@ -127,7 +134,12 @@
       <workItem from="1701253250780" duration="204000" />
       <workItem from="1701257212798" duration="10503000" />
       <workItem from="1701288803364" duration="190000" />
-      <workItem from="1701290060445" duration="794000" />
+      <workItem from="1701290060445" duration="954000" />
+      <workItem from="1701293955751" duration="275000" />
+      <workItem from="1701337944209" duration="31000" />
+      <workItem from="1701345705273" duration="5103000" />
+      <workItem from="1701366496531" duration="11649000" />
+      <workItem from="1701379045942" duration="4251000" />
     </task>
     <task id="LOCAL-00001" summary="I've separate the gui from the state">
       <option name="closed" value="true" />
@@ -145,11 +157,38 @@
       <option name="project" value="LOCAL" />
       <updated>1701270871789</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="- fix moves count , and maximal count moves&#10;- fix winner&#10;- fix reset game">
+      <option name="closed" value="true" />
+      <created>1701290926468</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1701290926468</updated>
+    </task>
+    <task id="LOCAL-00004" summary="add update">
+      <option name="closed" value="true" />
+      <created>1701351235622</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1701351235622</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.History.Properties">
+    <option name="COLUMN_ID_ORDER">
+      <list>
+        <option value="Default.Root" />
+        <option value="Default.Author" />
+        <option value="Default.Date" />
+        <option value="Default.Subject" />
+        <option value="Space.CommitStatus" />
+      </list>
+    </option>
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
@@ -185,60 +224,20 @@
     <MESSAGE value="I've separate the gui from the state" />
     <MESSAGE value="refactor  the whole code" />
     <MESSAGE value="- fix moves count , and maximal count moves" />
-    <option name="LAST_COMMIT_MESSAGE" value="- fix moves count , and maximal count moves" />
+    <MESSAGE value="- fix moves count , and maximal count moves&#10;- fix winner" />
+    <MESSAGE value="- fix moves count , and maximal count moves&#10;- fix winner&#10;- fix reset game" />
+    <MESSAGE value="add update" />
+    <MESSAGE value="fix alpha beta" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix alpha beta" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REARRANGE_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
   <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/example/domineering/Agent/AlphaBetaAgent.java</url>
-          <line>40</line>
-          <option name="timeStamp" value="17" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/example/domineering/Agent/AlphaBetaAgent.java</url>
-          <line>38</line>
-          <option name="timeStamp" value="18" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/example/domineering/Agent/AlphaBetaAgent.java</url>
-          <line>44</line>
-          <option name="timeStamp" value="19" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/example/domineering/Agent/AlphaBetaAgent.java</url>
-          <line>46</line>
-          <option name="timeStamp" value="20" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/example/domineering/Agent/AlphaBetaAgent.java</url>
-          <line>54</line>
-          <option name="timeStamp" value="21" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/example/domineering/Agent/AlphaBetaAgent.java</url>
-          <line>58</line>
-          <option name="timeStamp" value="22" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/example/domineering/Agent/AlphaBetaAgent.java</url>
-          <line>60</line>
-          <option name="timeStamp" value="23" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/example/domineering/Agent/AlphaBetaAgent.java</url>
-          <line>41</line>
-          <option name="timeStamp" value="24" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/example/domineering/GameSearch/DomineeringGameSearch.java</url>
-          <line>62</line>
-          <option name="timeStamp" value="25" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
+    <pin-to-top-manager>
+      <pinned-members>
+        <PinnedItemInfo parentTag="com.example.domineering.Position.DomineeringPosition" memberName="gridPane" />
+      </pinned-members>
+    </pin-to-top-manager>
   </component>
 </project>

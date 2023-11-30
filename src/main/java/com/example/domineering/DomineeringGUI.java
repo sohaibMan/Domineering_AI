@@ -417,7 +417,7 @@ public class DomineeringGUI extends Application {
         // Update the color of each square
         for (int row = 0; row < gamePosition.getNumSquares(); row++) {
             for (int col = 0; col < gamePosition.getNumSquares(); col++) {
-                Move square = (Move) gamePosition.getGridPane().getChildren().get(row * gamePosition.getNumSquares() + col);
+                Move square = gamePosition.getSquare(row, col);
                 if (square.isDisable()) {
                     square.setFill(square.getFill().equals(FIRST_PLAYER_COLOR) ? FIRST_PLAYER_COLOR : SECOND_PLAYER_COLOR);
                     square.setStroke(DEFAULT_STROKE_COLOR);

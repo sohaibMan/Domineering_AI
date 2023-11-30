@@ -2,9 +2,12 @@ package com.example.domineering.Position;
 
 import com.example.domineering.Move.Move;
 import com.example.domineering.Player;
+import javafx.scene.Node;
 import javafx.scene.layout.GridPane;
 
-public abstract class Position {
+import java.util.Arrays;
+
+public abstract class Position implements Cloneable {
 
     private Player player;
     private final int[] movesPlayer = {0, 0};
@@ -14,7 +17,7 @@ public abstract class Position {
 
     private static final boolean DEBUG = false;
 
-    private final GridPane gridPane = new GridPane();
+    private GridPane gridPane = new GridPane();
 
 
     Position(Player player) {
@@ -93,7 +96,7 @@ public abstract class Position {
             return (Move) gridPane.getChildren().get(index);
         } else {
             // Handle the error, for now, returning null
-            return null;
+            throw new IllegalArgumentException("Invalid row and column row= " + row + " col=" + col);
         }
     }
 
@@ -105,5 +108,41 @@ public abstract class Position {
         currentPlayer = 1;
         movesPlayer[0] = 0;
         movesPlayer[1] = 0;
+        for (Node child : gridPane.getChildren()) {
+            child.setDisable(false);
+            child.getProperties().remove("player");
+        }
+    }
+
+    @Override
+    public Position clone() {
+        try {
+            Position clonedPosition = (Position) super.clone();
+            // Make sure to create a new GridPane instance for the clone
+            clonedPosition.gridPane = new GridPane();
+            // Clone other mutable fields if needed
+
+            // Copy the children of the original gridPane to the new one
+            for (Node child : gridPane.getChildren()) {
+                Move originalMove = (Move) child;
+                Move clonedMove = originalMove.clone();
+                clonedPosition.gridPane.add(clonedMove, GridPane.getColumnIndex(originalMove), GridPane.getRowIndex(originalMove));
+            }
+            return clonedPosition;
+
+        } catch (CloneNotSupportedException e) {
+            throw new AssertionError();
+        }
+    }
+
+
+    @Override
+    public String toString() {
+        return "Position{" +
+                "player=" + player +
+                ", movesPlayer=" + Arrays.toString(movesPlayer) +
+                ", currentPlayer=" + currentPlayer +
+                ", gridPane=" + gridPane +
+                '}';
     }
 }
