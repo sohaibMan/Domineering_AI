@@ -110,5 +110,4 @@ public class AlphaBetaAgent extends Agent {
         return evaluation;
     }
 
-
 }

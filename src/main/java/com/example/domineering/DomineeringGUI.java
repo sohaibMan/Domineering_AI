@@ -362,8 +362,6 @@ public class DomineeringGUI extends Application {
 
 //        AlphaBetaAgent alphaBetaAgent = new AlphaBetaAgent();
 
-
-
             if (gamePosition.isCurrentPlayer(Player.HUMAN) || gamePosition.isCurrentPlayer(1)) {
                 if (hintCount < 3) {
 
@@ -396,8 +394,6 @@ public class DomineeringGUI extends Application {
                 }
 
             }
-
-
 
 
     }
