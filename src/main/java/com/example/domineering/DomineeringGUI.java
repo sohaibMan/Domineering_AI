@@ -276,6 +276,8 @@ public class DomineeringGUI extends Application {
         Showhint.setLayoutX(960);
         Showhint.setLayoutY(400);
         Showhint.setStyle("-fx-background-color:GRAY; -fx-text-fill: white; -fx-font-size: 14; -fx-font-weight: bold; -fx-font-family: Monospaced;");
+        hintStatusLabel.setLayoutX(960);
+        hintStatusLabel.setLayoutY(380);
         table.setLayoutX(870);
         table.setLayoutY(520);
         movePlayer1.setLayoutX(800);
@@ -289,6 +291,7 @@ public class DomineeringGUI extends Application {
         root.getChildren().add(table);
         root.getChildren().add(movePlayer1);
         root.getChildren().add(movePlayer2);
+        root.getChildren().add(hintStatusLabel);
 
         //if i click in minmax or alphabeta i will show the button Show hint
 
