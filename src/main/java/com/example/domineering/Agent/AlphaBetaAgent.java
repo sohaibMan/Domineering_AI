@@ -36,48 +36,34 @@ public class AlphaBetaAgent extends Agent {
 
         if (depth == 0 || wonPosition(position, currentPlayer)) {
             float evaluation = positionEvaluation(position, domineeringGameSearch, currentPlayer);
-            return new AlphaBetaAgentMoveEvaluation(position, evaluation); // Use null for Move in case of leaf nodes
+            return new AlphaBetaAgentMoveEvaluation(position, evaluation);
         }
 
-        AlphaBetaAgentMove[] possibleMoves = domineeringGameSearch.possibleMoves(position, currentPlayer);
-
-
-        // searching for the best move
         AlphaBetaAgentMoveEvaluation bestMove = new AlphaBetaAgentMoveEvaluation(null, maximizingPlayer ? Float.NEGATIVE_INFINITY : Float.POSITIVE_INFINITY);
 
-        if (maximizingPlayer) {
-            float maxEval = Float.NEGATIVE_INFINITY;
-            for (AlphaBetaAgentMove possiblePosition : possibleMoves) {
-                AlphaBetaAgentMoveEvaluation possiblePositionEval = alphaBeta(possiblePosition, depth - 1, alpha, beta, false, domineeringGameSearch);
-                if (possiblePositionEval == null) continue;
-                float eval = possiblePositionEval.getEvaluation();
-                if (eval > maxEval) {
-                    maxEval = eval;
-                    bestMove = new AlphaBetaAgentMoveEvaluation(possiblePositionEval.getAlphaBetaAgentMove(), eval);
+        for (AlphaBetaAgentMove possibleMove : domineeringGameSearch.possibleMoves(position, currentPlayer)) {
+            AlphaBetaAgentMoveEvaluation possibleMoveEval = alphaBeta(possibleMove, depth - 1, alpha, beta, !maximizingPlayer, domineeringGameSearch);
+
+            if (possibleMoveEval != null) {
+                float eval = possibleMoveEval.getEvaluation();
+
+                if (maximizingPlayer && eval > bestMove.getEvaluation()) {
+                    bestMove = new AlphaBetaAgentMoveEvaluation(possibleMove, eval);
+                    alpha = Math.max(alpha, eval);
+                } else if (!maximizingPlayer && eval < bestMove.getEvaluation()) {
+                    bestMove = new AlphaBetaAgentMoveEvaluation(possibleMove, eval);
+                    beta = Math.min(beta, eval);
                 }
-                alpha = Math.max(alpha, maxEval);
-                if (beta <= alpha) {
-                    break;
-                }
-            }
-        } else {
-            float minEval = Float.POSITIVE_INFINITY;
-            for (AlphaBetaAgentMove possiblePosition : possibleMoves) {
-                AlphaBetaAgentMoveEvaluation possiblePositionEval = alphaBeta(possiblePosition, depth - 1, alpha, beta, true, domineeringGameSearch);
-                if (possiblePositionEval == null) continue;
-                float eval = possiblePositionEval.getEvaluation();
-                if (eval < minEval) {
-                    minEval = eval;
-                    bestMove = new AlphaBetaAgentMoveEvaluation(possiblePositionEval.getAlphaBetaAgentMove(), eval);
-                }
-                beta = Math.min(beta, minEval);
+
                 if (beta <= alpha) {
                     break;
                 }
             }
         }
+
         return bestMove;
     }
+
 
     private boolean wonPosition(AlphaBetaAgentMove position, int player) {
         int numSquares = position.getNumSquares();
