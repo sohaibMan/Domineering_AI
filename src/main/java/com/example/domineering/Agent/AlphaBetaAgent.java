@@ -8,7 +8,7 @@ import com.example.domineering.Position.Position;
 
 public class AlphaBetaAgent extends Agent {
 
-    private static final int MAX_DEPTH = 5;
+    private static final int MAX_DEPTH = 2;
 
     @Override
     public Move makeMove(Position gamePosition, GameSearch domineeringGameSearch) {
