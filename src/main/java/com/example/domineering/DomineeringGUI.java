@@ -365,7 +365,7 @@ public class DomineeringGUI extends Application {
 
 
             if (gamePosition.isCurrentPlayer(Player.HUMAN) || gamePosition.isCurrentPlayer(1)) {
-                if (hintCount < 4) {
+                if (hintCount < 3) {
 
                     Move hintMove = domineeringGameSearch.makeMove(gamePosition, domineeringGameSearch);
 
@@ -380,7 +380,7 @@ public class DomineeringGUI extends Application {
 
                 hintStatusLabel.setText("Hints: " + hintCount + "/3");
 
-                if (hintCount == 4) {
+                if (hintCount == 3) {
                     Showhint.setDisable(true);
 
                     hintStatusLabel.setText("Max Hints Reached!");
