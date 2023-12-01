@@ -4,7 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4f1eaf66-04c2-480a-a7d3-97112feb4f2b" name="Changes" comment="fix alpha beta">
+    <list default="true" id="4f1eaf66-04c2-480a-a7d3-97112feb4f2b" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_11_24_23,_8_29_PM_[Changes]/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_11_24_23__8_29_PM__Changes_.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/domineering/DomineeringGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/domineering/DomineeringGUI.java" afterDir="false" />
     </list>
@@ -59,31 +61,31 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ASKED_ADD_EXTERNAL_FILES": "true",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "git-widget-placeholder": "HintMove",
-    "last_opened_file_path": "/home/sohaib/Desktop/Code(2-11-23)",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Project",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.27471265",
-    "settings.editor.selected.configurable": "preferences.pluginManager",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;Convert&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/home/sohaib/Desktop/Code(2-11-23)&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.27471265&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RunManager">
     <configuration name="DomineeringGUI" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.example.domineering.DomineeringGUI" />
-      <module name="domineering" />
+      <module name="Domineering_AI" />
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="com.example.domineering.Agent.*" />
@@ -96,7 +98,6 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.DomineeringGUI" />
         <item itemvalue="Application.DomineeringGUI" />
         <item itemvalue="Application.DomineeringGUI" />
       </list>
@@ -126,13 +127,7 @@
       <workItem from="1701253250780" duration="204000" />
       <workItem from="1701257212798" duration="10503000" />
       <workItem from="1701288803364" duration="190000" />
-      <workItem from="1701290060445" duration="954000" />
-      <workItem from="1701293955751" duration="275000" />
-      <workItem from="1701337944209" duration="31000" />
-      <workItem from="1701345705273" duration="5103000" />
-      <workItem from="1701366496531" duration="11649000" />
-      <workItem from="1701379045942" duration="4251000" />
-      <workItem from="1701458017917" duration="6923000" />
+      <workItem from="1701290060445" duration="794000" />
     </task>
     <task id="LOCAL-00001" summary="I've separate the gui from the state">
       <option name="closed" value="true" />
@@ -150,38 +145,11 @@
       <option name="project" value="LOCAL" />
       <updated>1701270871789</updated>
     </task>
-    <task id="LOCAL-00003" summary="- fix moves count , and maximal count moves&#10;- fix winner&#10;- fix reset game">
-      <option name="closed" value="true" />
-      <created>1701290926468</created>
-      <option name="number" value="00003" />
-      <option name="presentableId" value="LOCAL-00003" />
-      <option name="project" value="LOCAL" />
-      <updated>1701290926468</updated>
-    </task>
-    <task id="LOCAL-00004" summary="add update">
-      <option name="closed" value="true" />
-      <created>1701351235622</created>
-      <option name="number" value="00004" />
-      <option name="presentableId" value="LOCAL-00004" />
-      <option name="project" value="LOCAL" />
-      <updated>1701351235622</updated>
-    </task>
-    <option name="localTasksCounter" value="5" />
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
-  </component>
-  <component name="Vcs.Log.History.Properties">
-    <option name="COLUMN_ID_ORDER">
-      <list>
-        <option value="Default.Root" />
-        <option value="Default.Author" />
-        <option value="Default.Date" />
-        <option value="Default.Subject" />
-        <option value="Space.CommitStatus" />
-      </list>
-    </option>
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
@@ -217,21 +185,20 @@
     <MESSAGE value="I've separate the gui from the state" />
     <MESSAGE value="refactor  the whole code" />
     <MESSAGE value="- fix moves count , and maximal count moves" />
-    <MESSAGE value="- fix moves count , and maximal count moves&#10;- fix winner" />
-    <MESSAGE value="- fix moves count , and maximal count moves&#10;- fix winner&#10;- fix reset game" />
-    <MESSAGE value="add update" />
-    <MESSAGE value="fix alpha beta" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix alpha beta" />
+    <option name="LAST_COMMIT_MESSAGE" value="- fix moves count , and maximal count moves" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REARRANGE_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
   <component name="XDebuggerManager">
-    <pin-to-top-manager>
-      <pinned-members>
-        <PinnedItemInfo parentTag="com.example.domineering.Position.DomineeringPosition" memberName="movesPlayer" />
-        <PinnedItemInfo parentTag="com.example.domineering.Position.DomineeringPosition" memberName="gridPane" />
-      </pinned-members>
-    </pin-to-top-manager>
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/example/domineering/GameSearch/DomineeringGameSearch.java</url>
+          <line>62</line>
+          <option name="timeStamp" value="25" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

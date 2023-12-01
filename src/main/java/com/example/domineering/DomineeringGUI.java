@@ -226,24 +226,28 @@ public class DomineeringGUI extends Application {
             gamePosition.setCurrentPlayerType(Player.HUMAN);
             adversaryLabel.setText(gamePosition.getCurrentPlayerType().toString());
             root.getChildren().remove(Showhint);
+            root.getChildren().remove(hintStatusLabel);
         });
         randomPlayerMenuItem.setOnAction(e -> {
             restartGame();
             gamePosition.setCurrentPlayerType(Player.RANDOM);
             adversaryLabel.setText(gamePosition.getCurrentPlayerType().toString());
             root.getChildren().remove(Showhint);
+            root.getChildren().remove(hintStatusLabel);
         });
         minMaxPlayerMenuItem.setOnAction(e -> {
             restartGame();
             gamePosition.setCurrentPlayerType(Player.MINIMAX);
             adversaryLabel.setText(gamePosition.getCurrentPlayerType().toString());
             root.getChildren().add(Showhint);
+            root.getChildren().add(hintStatusLabel);
         });
         alphaBetaPlaeryMenuItem.setOnAction(e -> {
             restartGame();
             gamePosition.setCurrentPlayerType(Player.ALPHA_BETA);
             adversaryLabel.setText(gamePosition.getCurrentPlayerType().toString());
             root.getChildren().add(Showhint);
+            root.getChildren().add(hintStatusLabel);
         });
 
 
@@ -278,6 +282,7 @@ public class DomineeringGUI extends Application {
         Showhint.setStyle("-fx-background-color:GRAY; -fx-text-fill: white; -fx-font-size: 14; -fx-font-weight: bold; -fx-font-family: Monospaced;");
         hintStatusLabel.setLayoutX(960);
         hintStatusLabel.setLayoutY(380);
+        hintStatusLabel.setStyle("-fx-font-size: 14; -fx-font-weight: bold; -fx-font-family: Monospaced;");
         table.setLayoutX(870);
         table.setLayoutY(520);
         movePlayer1.setLayoutX(800);
@@ -291,9 +296,8 @@ public class DomineeringGUI extends Application {
         root.getChildren().add(table);
         root.getChildren().add(movePlayer1);
         root.getChildren().add(movePlayer2);
-        root.getChildren().add(hintStatusLabel);
 
-        //if i click in minmax or alphabeta i will show the button Show hint
+
 
 
         Scene scene = new Scene(root, BOX_SIZE * gamePosition.getNumSquares(), BOX_SIZE * gamePosition.getNumSquares());
