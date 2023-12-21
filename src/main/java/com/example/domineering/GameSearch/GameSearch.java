@@ -19,5 +19,6 @@ public abstract class GameSearch {
 
     public abstract Move getNeighbourMove(Position position, Move move, int player);
 
+
     public abstract Move makeMove(Position gamePosition, GameSearch gameSearch);
 }

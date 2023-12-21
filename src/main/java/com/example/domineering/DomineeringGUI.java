@@ -1,6 +1,7 @@
 package com.example.domineering;
 
 import com.example.domineering.Agent.AlphaBetaAgent;
+import com.example.domineering.Agent.RandomAgent;
 import com.example.domineering.GameSearch.DomineeringGameSearch;
 import com.example.domineering.GameSearch.GameSearch;
 import com.example.domineering.Helpers.DomineeringHelpers;
@@ -261,6 +262,8 @@ public class DomineeringGUI extends Application {
             updateUI();
         });
 
+
+
         // Add menu items to the Options menu
         optionsMenu.getItems().addAll(newGameMenuItem, saveGameMenuItem, loadGameMenuItem, exitMenuItem);
 
@@ -326,7 +329,7 @@ public class DomineeringGUI extends Application {
         maxPossibleMovesPlayer2Label.setText(String.valueOf(countMaxPossibleMoves(2)));
         movesPlayer1Label.setText("0");
         movesPlayer2Label.setText("0");
-        hintStatusLabel.setText("Hints: 0/3");
+        hintStatusLabel.setText("Hints: 0/2");
         hintCount = 0;
         Showhint.setDisable(false);
         this.gamePosition.reset();
@@ -360,12 +363,16 @@ public class DomineeringGUI extends Application {
     // Hint
     private void showHint() {
 
-//        AlphaBetaAgent alphaBetaAgent = new AlphaBetaAgent();
+        AlphaBetaAgent alphaBetaAgent = new AlphaBetaAgent();
 
             if (gamePosition.isCurrentPlayer(Player.HUMAN) || gamePosition.isCurrentPlayer(1)) {
-                if (hintCount < 3) {
+                System.out.println(hintCount);
 
-                    Move hintMove = domineeringGameSearch.makeMove(gamePosition, domineeringGameSearch);
+
+
+                if (hintCount <= 3) {
+
+                    Move hintMove = alphaBetaAgent.makeMove(gamePosition, domineeringGameSearch);
 
                     makeMove(new MouseEvent(MouseEvent.MOUSE_CLICKED, 0, 0, 0, 0, null, 0, false, false, false, false, false, false, false, false, false, false, null) {
                     @Override
@@ -374,16 +381,17 @@ public class DomineeringGUI extends Application {
                     }
                 });
 
+
                 hintCount++;
 
-                hintStatusLabel.setText("Hints: " + hintCount + "/3");
+                hintStatusLabel.setText("Hints: " + hintCount + "/2");
 
-                if (hintCount == 3) {
+                if (hintCount == 2) {
                     Showhint.setDisable(true);
 
                     hintStatusLabel.setText("Max Hints Reached!");
                 }
-                    Move opponentMove = domineeringGameSearch.makeMove(gamePosition, domineeringGameSearch);
+                    Move opponentMove = alphaBetaAgent.makeMove(gamePosition, domineeringGameSearch);
 
                     makeMove(new MouseEvent(MouseEvent.MOUSE_CLICKED, 0, 0, 0, 0, null, 0, false, false, false, false, false, false, false, false, false, false, null) {
                         @Override
@@ -392,6 +400,8 @@ public class DomineeringGUI extends Application {
                         }
                     });
                 }
+
+
 
             }
 

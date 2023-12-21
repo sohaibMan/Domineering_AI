@@ -7,7 +7,7 @@ import com.example.domineering.Position.Position;
 
 public class MinMaxAgent extends Agent {
 
-    private static final int MAX_DEPTH = 3;
+    private static final int MAX_DEPTH = 1;
 
     @Override
     public Move makeMove(Position gamePosition, GameSearch domineeringGameSearch) {
@@ -20,9 +20,17 @@ public class MinMaxAgent extends Agent {
                 domineeringGameSearch
         );
 
+//        Move defaultMove = new Move(-1, -1);
+
+
         System.out.println("new move" + minimaxAgentMove);
 
-        if (minimaxAgentMove == null) return null;
+        System.out.println("Best move: " + minimaxAgentMove.getMinimaxAgentMove());
+        System.out.println("Evaluation: " + minimaxAgentMove.getEvaluation());
+
+//        if (minimaxAgentMove == null || minimaxAgentMove.getMinimaxAgentMove() == null) {
+//            return null;
+//        }
 
         return gamePosition.getSquare(minimaxAgentMove.getMinimaxAgentMove().getRow(), minimaxAgentMove.getMinimaxAgentMove().getCol());
     }
@@ -35,9 +43,7 @@ public class MinMaxAgent extends Agent {
             return new MinMaxAgentMoveEvaluation(position, evaluation);
         }
 
-
         MinMaxAgentMove[] possibleMoves = domineeringGameSearch.possibleMovesMinMax(position, currentPlayer);
-
 
         MinMaxAgentMoveEvaluation bestMove = new MinMaxAgentMoveEvaluation(null, maximizingPlayer ? Float.NEGATIVE_INFINITY : Float.POSITIVE_INFINITY);
 
@@ -45,23 +51,24 @@ public class MinMaxAgent extends Agent {
             float maxEval = Float.NEGATIVE_INFINITY;
             for (MinMaxAgentMove possiblePosition : possibleMoves) {
                 MinMaxAgentMoveEvaluation possiblePositionEval = minimax(possiblePosition, depth - 1, false, domineeringGameSearch);
-                if (possiblePositionEval != null){
+                if (possiblePositionEval != null) {
                     float eval = possiblePositionEval.getEvaluation();
                     if (eval > maxEval) {
                         maxEval = eval;
                         bestMove = new MinMaxAgentMoveEvaluation(possiblePositionEval.getMinimaxAgentMove(), eval);
                     }
                 }
-
             }
         } else {
             float minEval = Float.POSITIVE_INFINITY;
             for (MinMaxAgentMove possiblePosition : possibleMoves) {
                 MinMaxAgentMoveEvaluation possiblePositionEval = minimax(possiblePosition, depth - 1, true, domineeringGameSearch);
-                float eval = possiblePositionEval.getEvaluation();
-                if (eval < minEval) {
-                    minEval = eval;
-                    bestMove = new MinMaxAgentMoveEvaluation(possiblePositionEval.getMinimaxAgentMove(), eval);
+                if (possiblePositionEval != null) {
+                    float eval = possiblePositionEval.getEvaluation();
+                    if (eval < minEval) {
+                        minEval = eval;
+                        bestMove = new MinMaxAgentMoveEvaluation(possiblePositionEval.getMinimaxAgentMove(), eval);
+                    }
                 }
             }
         }
