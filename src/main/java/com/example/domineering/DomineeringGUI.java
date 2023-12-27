@@ -483,6 +483,13 @@ public class DomineeringGUI extends Application {
         // Update the number of moves for each player
         movesPlayer1Label.setText(String.valueOf(gamePosition.getMovesPlayer(1)));
         movesPlayer2Label.setText(String.valueOf(gamePosition.getMovesPlayer(2)));
+        if(hintCount == 2){
+            hintStatusLabel.setText("Max Hints Reached!");
+            Showhint.setDisable(true);
+        }
+        else{
+            hintStatusLabel.setText("Hints: " + hintCount + "/2");
+        }
 
         // Update the color of the current player
         if (gamePosition.isCurrentPlayer(1)) {
