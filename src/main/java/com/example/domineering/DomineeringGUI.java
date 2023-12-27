@@ -51,7 +51,7 @@ public class DomineeringGUI extends Application {
     Pane root = new Pane() ;
     Button Showhint = new Button("Show hint");
     private Label hintStatusLabel;
-    private static int hintCount = 0;
+    public static int hintCount = 0;
 
 
     static private void resetMoveColors(Move... moves) {
