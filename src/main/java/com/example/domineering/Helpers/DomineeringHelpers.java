@@ -1,5 +1,6 @@
 package com.example.domineering.Helpers;
 
+import com.example.domineering.DomineeringGUI;
 import com.example.domineering.Position.Position;
 import javafx.scene.control.Alert;
 import javafx.scene.shape.Rectangle;
@@ -43,13 +44,18 @@ public class DomineeringHelpers extends Helpers {
                 // Write the number of moves for each player
                 fileWriter.write(position.getMovesPlayer(1) + "\n");
                 fileWriter.write(position.getMovesPlayer(2) + "\n");
+                // write the number of hints
+                fileWriter.write(DomineeringGUI.hintCount + "\n");
 
                 // Write the state of each square
                 for (int row = 0; row < position.getNumSquares(); row++) {
                     for (int col = 0; col < position.getNumSquares(); col++) {
                         Rectangle square = (Rectangle) position.getGridPane().getChildren().get(row * position.getNumSquares() + col);
                         fileWriter.write(square.isDisable() + "\n");
-                        fileWriter.write(square.getProperties().get("player") + "\n");
+
+                        // Write the color of the square
+                        boolean isFirstPlayerColor = square.getFill().equals(FIRST_PLAYER_COLOR);
+                        fileWriter.write(isFirstPlayerColor + "\n");
                     }
                 }
 
@@ -99,6 +105,12 @@ public class DomineeringHelpers extends Helpers {
                 // Read the number of moves for each player
                 position.setMovesPlayer(1, scanner.nextInt());
                 position.setMovesPlayer(2, scanner.nextInt());
+
+                // read the number of hints
+
+                DomineeringGUI.hintCount = scanner.nextInt();
+                System.out.println("-------------HINT-----------------"+DomineeringGUI.hintCount);
+//                DomineeringGUI.setHintCount(DomineeringGUI.hintCount);
 
 
                 // Read the state of each square
