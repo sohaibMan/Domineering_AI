@@ -1,5 +1,7 @@
 package com.example.domineering;
 
+import com.example.domineering.Agent.AlphaBetaAgent;
+import com.example.domineering.Agent.RandomAgent;
 import com.example.domineering.GameSearch.DomineeringGameSearch;
 import com.example.domineering.GameSearch.GameSearch;
 import com.example.domineering.Helpers.DomineeringHelpers;
@@ -48,6 +50,8 @@ public class DomineeringGUI extends Application {
 
     Pane root = new Pane() ;
     Button Showhint = new Button("Show hint");
+    private Label hintStatusLabel;
+    private static int hintCount = 0;
 
 
     static private void resetMoveColors(Move... moves) {
@@ -213,30 +217,38 @@ public class DomineeringGUI extends Application {
         // add menu items to the Player setting menu
         playerSettingMenu.getItems().addAll(humanPlayerMenuItem, randomPlayerMenuItem, minMaxPlayerMenuItem, alphaBetaPlaeryMenuItem);
 
+        Showhint.setOnAction(event -> showHint());
+
+        hintStatusLabel = new Label("Hints: 0/3");
+
         // set event handlers for menu items
         humanPlayerMenuItem.setOnAction(e -> {
             restartGame();
             gamePosition.setCurrentPlayerType(Player.HUMAN);
             adversaryLabel.setText(gamePosition.getCurrentPlayerType().toString());
             root.getChildren().remove(Showhint);
+            root.getChildren().remove(hintStatusLabel);
         });
         randomPlayerMenuItem.setOnAction(e -> {
             restartGame();
             gamePosition.setCurrentPlayerType(Player.RANDOM);
             adversaryLabel.setText(gamePosition.getCurrentPlayerType().toString());
             root.getChildren().remove(Showhint);
+            root.getChildren().remove(hintStatusLabel);
         });
         minMaxPlayerMenuItem.setOnAction(e -> {
             restartGame();
             gamePosition.setCurrentPlayerType(Player.MINIMAX);
             adversaryLabel.setText(gamePosition.getCurrentPlayerType().toString());
             root.getChildren().add(Showhint);
+            root.getChildren().add(hintStatusLabel);
         });
         alphaBetaPlaeryMenuItem.setOnAction(e -> {
             restartGame();
             gamePosition.setCurrentPlayerType(Player.ALPHA_BETA);
             adversaryLabel.setText(gamePosition.getCurrentPlayerType().toString());
             root.getChildren().add(Showhint);
+            root.getChildren().add(hintStatusLabel);
         });
 
 
@@ -249,6 +261,8 @@ public class DomineeringGUI extends Application {
             // Update the UI
             updateUI();
         });
+
+
 
         // Add menu items to the Options menu
         optionsMenu.getItems().addAll(newGameMenuItem, saveGameMenuItem, loadGameMenuItem, exitMenuItem);
@@ -269,6 +283,9 @@ public class DomineeringGUI extends Application {
         Showhint.setLayoutX(960);
         Showhint.setLayoutY(400);
         Showhint.setStyle("-fx-background-color:GRAY; -fx-text-fill: white; -fx-font-size: 14; -fx-font-weight: bold; -fx-font-family: Monospaced;");
+        hintStatusLabel.setLayoutX(960);
+        hintStatusLabel.setLayoutY(380);
+        hintStatusLabel.setStyle("-fx-font-size: 14; -fx-font-weight: bold; -fx-font-family: Monospaced;");
         table.setLayoutX(870);
         table.setLayoutY(520);
         movePlayer1.setLayoutX(800);
@@ -283,7 +300,7 @@ public class DomineeringGUI extends Application {
         root.getChildren().add(movePlayer1);
         root.getChildren().add(movePlayer2);
 
-        //if i click in minmax or alphabeta i will show the button Show hint
+
 
 
         Scene scene = new Scene(root, BOX_SIZE * gamePosition.getNumSquares(), BOX_SIZE * gamePosition.getNumSquares());
@@ -312,7 +329,11 @@ public class DomineeringGUI extends Application {
         maxPossibleMovesPlayer2Label.setText(String.valueOf(countMaxPossibleMoves(2)));
         movesPlayer1Label.setText("0");
         movesPlayer2Label.setText("0");
+        hintStatusLabel.setText("Hints: 0/2");
+        hintCount = 0;
+        Showhint.setDisable(false);
         this.gamePosition.reset();
+
         updateUI();
     }
 
@@ -334,10 +355,59 @@ public class DomineeringGUI extends Application {
                         return move;
                     }
                 });
-
             }
         }
     }
+
+
+    // Hint
+    private void showHint() {
+
+        AlphaBetaAgent alphaBetaAgent = new AlphaBetaAgent();
+
+            if (gamePosition.isCurrentPlayer(Player.HUMAN) || gamePosition.isCurrentPlayer(1)) {
+                System.out.println(hintCount);
+
+
+
+                if (hintCount <= 3) {
+
+                    Move hintMove = alphaBetaAgent.makeMove(gamePosition, domineeringGameSearch);
+
+                    makeMove(new MouseEvent(MouseEvent.MOUSE_CLICKED, 0, 0, 0, 0, null, 0, false, false, false, false, false, false, false, false, false, false, null) {
+                    @Override
+                    public Object getSource() {
+                        return hintMove;
+                    }
+                });
+
+
+                hintCount++;
+
+                hintStatusLabel.setText("Hints: " + hintCount + "/2");
+
+                if (hintCount == 2) {
+                    Showhint.setDisable(true);
+
+                    hintStatusLabel.setText("Max Hints Reached!");
+                }
+                    Move opponentMove = alphaBetaAgent.makeMove(gamePosition, domineeringGameSearch);
+
+                    makeMove(new MouseEvent(MouseEvent.MOUSE_CLICKED, 0, 0, 0, 0, null, 0, false, false, false, false, false, false, false, false, false, false, null) {
+                        @Override
+                        public Object getSource() {
+                            return opponentMove;
+                        }
+                    });
+                }
+
+
+
+            }
+
+
+    }
+
 
 
     public static void main(String[] args) {

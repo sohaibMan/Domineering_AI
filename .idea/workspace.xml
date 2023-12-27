@@ -4,17 +4,21 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4f1eaf66-04c2-480a-a7d3-97112feb4f2b" name="Changes" comment="fix alpha beta">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/domineering/Agent/AlphaBetaAgentMoveEvaluation.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/domineering/Move/AlphaBetaAgentMove.java" afterDir="false" />
+    <list default="true" id="4f1eaf66-04c2-480a-a7d3-97112feb4f2b" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_12_1_2023_10_12_PM_[Changes]/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_12_1_2023_10_12_PM__Changes_.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_11_24_2023_9_43_PM_[Changes]/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_11_24_2023_9_43_PM__Changes_.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_11_26_2023_11_00_PM_[Changes]/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_11_26_2023_11_00_PM__Changes_.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_11_26_23,_7_20_PM_[Changes]/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_11_26_23__7_20_PM__Changes_.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/domineering/Agent/AlphaBetaAgent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/domineering/Agent/AlphaBetaAgent.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/domineering/Agent/MoveEvaluation.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/domineering/Agent/MinMaxAgent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/domineering/Agent/MinMaxAgent.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/domineering/DomineeringGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/domineering/DomineeringGUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/domineering/GameSearch/DomineeringGameSearch.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/domineering/GameSearch/DomineeringGameSearch.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/domineering/GameSearch/GameSearch.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/domineering/GameSearch/GameSearch.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/domineering/Move/Move.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/domineering/Move/Move.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/domineering/Position/Position.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/domineering/Position/Position.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/domineering/Move/MinMaxAgentMove.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/domineering/Move/MinMaxAgentMove.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -74,8 +78,8 @@
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;FixV1&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/home/sohaib/Desktop/Code(2-11-23)&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;HintMove&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/projects/S3/jsfJpaLSI&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
@@ -88,6 +92,12 @@
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
+  <component name="RecentsManager">
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.example.domineering.Agent" />
+      <recent name="com.example.domineering.Move" />
+    </key>
+  </component>
   <component name="RunManager">
     <configuration name="DomineeringGUI" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.example.domineering.DomineeringGUI" />
@@ -104,7 +114,6 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.DomineeringGUI" />
         <item itemvalue="Application.DomineeringGUI" />
         <item itemvalue="Application.DomineeringGUI" />
       </list>
@@ -140,6 +149,12 @@
       <workItem from="1701345705273" duration="5103000" />
       <workItem from="1701366496531" duration="11649000" />
       <workItem from="1701379045942" duration="4251000" />
+      <workItem from="1701458017917" duration="7630000" />
+      <workItem from="1701698961161" duration="3081000" />
+      <workItem from="1702502962487" duration="112000" />
+      <workItem from="1702503344146" duration="192000" />
+      <workItem from="1702503557627" duration="7911000" />
+      <workItem from="1703157658415" duration="3737000" />
     </task>
     <task id="LOCAL-00001" summary="I've separate the gui from the state">
       <option name="closed" value="true" />
@@ -157,38 +172,11 @@
       <option name="project" value="LOCAL" />
       <updated>1701270871789</updated>
     </task>
-    <task id="LOCAL-00003" summary="- fix moves count , and maximal count moves&#10;- fix winner&#10;- fix reset game">
-      <option name="closed" value="true" />
-      <created>1701290926468</created>
-      <option name="number" value="00003" />
-      <option name="presentableId" value="LOCAL-00003" />
-      <option name="project" value="LOCAL" />
-      <updated>1701290926468</updated>
-    </task>
-    <task id="LOCAL-00004" summary="add update">
-      <option name="closed" value="true" />
-      <created>1701351235622</created>
-      <option name="number" value="00004" />
-      <option name="presentableId" value="LOCAL-00004" />
-      <option name="project" value="LOCAL" />
-      <updated>1701351235622</updated>
-    </task>
-    <option name="localTasksCounter" value="5" />
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
-  </component>
-  <component name="Vcs.Log.History.Properties">
-    <option name="COLUMN_ID_ORDER">
-      <list>
-        <option value="Default.Root" />
-        <option value="Default.Author" />
-        <option value="Default.Date" />
-        <option value="Default.Subject" />
-        <option value="Space.CommitStatus" />
-      </list>
-    </option>
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
@@ -224,11 +212,7 @@
     <MESSAGE value="I've separate the gui from the state" />
     <MESSAGE value="refactor  the whole code" />
     <MESSAGE value="- fix moves count , and maximal count moves" />
-    <MESSAGE value="- fix moves count , and maximal count moves&#10;- fix winner" />
-    <MESSAGE value="- fix moves count , and maximal count moves&#10;- fix winner&#10;- fix reset game" />
-    <MESSAGE value="add update" />
-    <MESSAGE value="fix alpha beta" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix alpha beta" />
+    <option name="LAST_COMMIT_MESSAGE" value="- fix moves count , and maximal count moves" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REARRANGE_BEFORE_PROJECT_COMMIT" value="true" />
@@ -236,6 +220,7 @@
   <component name="XDebuggerManager">
     <pin-to-top-manager>
       <pinned-members>
+        <PinnedItemInfo parentTag="com.example.domineering.Position.DomineeringPosition" memberName="movesPlayer" />
         <PinnedItemInfo parentTag="com.example.domineering.Position.DomineeringPosition" memberName="gridPane" />
       </pinned-members>
     </pin-to-top-manager>
