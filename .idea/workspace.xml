@@ -14,8 +14,10 @@
       <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_11_26_23,_7_20_PM_[Changes]/shelved.patch" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_11_26_23__7_20_PM__Changes_.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/domineering/Agent/MinMaxAgent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/domineering/Agent/MinMaxAgent.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/domineering/DomineeringGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/domineering/DomineeringGUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/domineering/Helpers/DomineeringHelpers.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/domineering/Helpers/DomineeringHelpers.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/domineering/GameSearch/GameSearch.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/domineering/GameSearch/GameSearch.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/domineering/Move/MinMaxAgentMove.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/domineering/Move/MinMaxAgentMove.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -75,8 +77,8 @@
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;Convert&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/home/sohaib/Desktop/Code(2-11-23)&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;HintMove&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/projects/S3/jsfJpaLSI&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
@@ -89,10 +91,16 @@
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
+  <component name="RecentsManager">
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.example.domineering.Agent" />
+      <recent name="com.example.domineering.Move" />
+    </key>
+  </component>
   <component name="RunManager">
     <configuration name="DomineeringGUI" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.example.domineering.DomineeringGUI" />
-      <module name="Domineering_AI" />
+      <module name="domineering" />
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="com.example.domineering.Agent.*" />
@@ -134,8 +142,18 @@
       <workItem from="1701253250780" duration="204000" />
       <workItem from="1701257212798" duration="10503000" />
       <workItem from="1701288803364" duration="190000" />
-      <workItem from="1701290060445" duration="794000" />
-      <workItem from="1703690711879" duration="1557000" />
+      <workItem from="1701290060445" duration="954000" />
+      <workItem from="1701293955751" duration="275000" />
+      <workItem from="1701337944209" duration="31000" />
+      <workItem from="1701345705273" duration="5103000" />
+      <workItem from="1701366496531" duration="11649000" />
+      <workItem from="1701379045942" duration="4251000" />
+      <workItem from="1701458017917" duration="7630000" />
+      <workItem from="1701698961161" duration="3081000" />
+      <workItem from="1702502962487" duration="112000" />
+      <workItem from="1702503344146" duration="192000" />
+      <workItem from="1702503557627" duration="7911000" />
+      <workItem from="1703157658415" duration="3737000" />
     </task>
     <task id="LOCAL-00001" summary="I've separate the gui from the state">
       <option name="closed" value="true" />
@@ -199,19 +217,11 @@
     <option name="REARRANGE_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
   <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/example/domineering/Agent/AlphaBetaAgent.java</url>
-          <line>63</line>
-          <option name="timeStamp" value="29" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/example/domineering/Agent/AlphaBetaAgent.java</url>
-          <line>65</line>
-          <option name="timeStamp" value="30" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
+    <pin-to-top-manager>
+      <pinned-members>
+        <PinnedItemInfo parentTag="com.example.domineering.Position.DomineeringPosition" memberName="movesPlayer" />
+        <PinnedItemInfo parentTag="com.example.domineering.Position.DomineeringPosition" memberName="gridPane" />
+      </pinned-members>
+    </pin-to-top-manager>
   </component>
 </project>
